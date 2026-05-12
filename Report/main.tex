@@ -1,0 +1,52 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage[backend = biber, 
+            style=apa, 
+            bibstyle=apa,
+            pluralothers=true,
+            hyperref=false,
+            backref=true,
+            backrefstyle=two
+            ]{biblatex}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+\DeclareCiteCommand{\citedatelink}
+  {\usebibmacro{prenote}}
+  {\printtext[bibhyperref]{\printdate}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\usepackage{geometry}
+\geometry{tmargin = 80pt, 
+          rmargin = 80pt, 
+          lmargin = 80pt, 
+          bmargin = 80pt}
+
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage[font=small]{caption}
+
+%\bibliography{ref.bib}
+
+\title{}
+\author{Anvel (Marguerite) de Sainte Marie d'Agneaux}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/}
+  \caption{}
+  \label{fig:}
+\end{figure}
+
+
+\printbibliography
+\end{document}
