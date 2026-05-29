@@ -38,15 +38,38 @@
 \begin{document}
 \maketitle
 
+\section{Introduction}
+\label{sec:intro}
+While most fluid movements in astrophysical hydrodynamics can be brought down to a few conceptually simple instabilities, the way the fluids evolve due to these instability is not simple.
 
+\section{Method}
+\label{sec:meth}
 
-\begin{figure}[ht!]
-  \centering
-  \includegraphics[width=0.75\textwidth]{images/}
-  \caption{}
-  \label{fig:}
-\end{figure}
+\begin{comment}
+- 2D
+- 2 cases of common instabilities : RT and KH
+- implement Euler's equations in both dx and dy
+- dt = C*min(dx, dy)/max(|u+c_s|*D), D is dim number
+- if can, want us to do it in compiled language
 
+- RTI :
+  - dense fluid next to less dense fluid
+  - both have // adiab index
+  - external grav filed w/ dir so dense fluid "on top"
+  - P chosen so fluid = hydrosttc eq
+  - means : low rho fluid below interface : higher U than dense fluid
+        above interface
+    
+\end{comment}
+
+\section{Results}
+\label{sec:res}
+
+\section{Discussion}
+\label{sec:disc}
+
+\section{Conclusion}
+\label{sec:conc}
 
 \printbibliography
 \end{document}
