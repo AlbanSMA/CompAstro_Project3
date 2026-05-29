@@ -22,21 +22,20 @@ def ini_plot(rho, lstx, lsty, xcells, ycells, imagepath):
     # finish the plot
     ax.set_ylabel("x")
     ax.set_xlabel("y")
-    ax.set_title("step 0")
+    ax.set_title("time 0")
 
     #save
     fig.colorbar(img, ax=ax, orientation="horizontal")
     fig.savefig(imagepath+"\\step0.pdf", dpi = 300, bbox_inches = "tight")
-    
     return fig, ax, img
 
 
-def plotting(rho, fig, ax, img, n, imagepath):
+def plotting(rho, fig, ax, img, time, n, imagepath):
     """For a given updated rho at timestep n, updates plot ax and saves it to 
     imagepath"""
 
     img.set_data(rho)
-    ax.set_title(f"step {n}")
+    ax.set_title(f"time {time}")
 
     fig.canvas.draw()
     fig.canvas.flush_events()

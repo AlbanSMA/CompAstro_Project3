@@ -54,6 +54,7 @@ def getDensity(rho, n_dim, xcells, ycells, dx, dy):
 
     rhoU = rho - 0.5*slope[0]
     rhoR = rho - 0.5*slope[1]
+
     return rhoL, rhoR, rhoD, rhoU
 
 def getVelocities(vel, n_dim, xcells, ycells, dx, dy):

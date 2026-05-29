@@ -14,13 +14,12 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusU = np.zeros((3, xcells, ycells))
 
     #masks to avoid loops, depending on the velocity:
-    maskminvely = vel[0] < 0
-    maskminvelx = vel[1] < 0
-    maskpluvely = vel[0] >= 0
-    maskpluvelx = vel[1] >= 0
+    maskminvely = vel[1] < 0
+    maskminvelx = vel[0] < 0
+    maskpluvely = vel[1] >= 0
+    maskpluvelx = vel[0] >= 0
 
-    #On the left
-    # y direction
+    # down, y direction
         #negative velocity
     FminD[0, :-1, :][maskminvely[1:, :]] = velD[1:, :][maskminvely[1:, :]]**2 * rhoD[1:, :][maskminvely[1:, :]]
     FminD[1, :-1, :][maskminvely[1:, :]] = velD[1:, :][maskminvely[1:, :]]**2 * rhoD[1:, :][maskminvely[1:, :]] + PD[1:, :][maskminvely[1:, :]]
@@ -39,7 +38,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusD[1, 1:, :][maskpluvely[:-1, :]] = velD[:-1, :][maskpluvely[:-1, :]]**2 * rhoD[:-1, :][maskpluvely[:-1, :]] + PD[:-1, :][maskpluvely[:-1, :]]
     FplusD[2, 1:, :][maskpluvely[:-1, :]] = velD[:-1, :][maskpluvely[:-1, :]] * (EintD[:-1, :][maskpluvely[:-1, :]] + PD[:-1, :][maskpluvely[:-1, :]])
 
-    # y direction
+    # left, x direction
         # negative velocity
     FminL[0, :, :-1][maskminvelx[:, 1:]] = velL[:, 1:][maskminvelx[:, 1:]]**2 * rhoL[:, 1:][maskminvelx[:, 1:]]
     FminL[1, :, :-1][maskminvelx[:, 1:]] = velL[:, 1:][maskminvelx[:, 1:]]**2 * rhoL[:, 1:][maskminvelx[:, 1:]] + PL[:, 1:][maskminvelx[:, 1:]]
@@ -58,9 +57,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusL[1, :, 1:][maskpluvelx[:, :-1]] = velL[:, :-1][maskpluvelx[:, :-1]]**2 * rhoL[:, :-1][maskpluvelx[:, :-1]] + PL[:, :-1][maskpluvelx[:, :-1]]
     FplusL[2, :, 1:][maskpluvelx[:, :-1]] = velL[:, :-1][maskpluvelx[:, :-1]] * (EintL[:, :-1][maskpluvelx[:, :-1]] + PL[:, :-1][maskpluvelx[:, :-1]])
 
-
-    #On the right:
-    # x direction
+    # up, y direction
         #negative velocity
     FminU[0, :-1, :][maskminvely[1:, :]] = velU[1:, :][maskminvely[1:, :]]**2 * rhoU[ 1:, :][maskminvely[1:, :]]
     FminU[1, :-1, :][maskminvely[1:, :]] = velU[1:, :][maskminvely[1:, :]]**2 * rhoU[ 1:, :][maskminvely[1:, :]] + PU[1:, :][maskminvely[1:, :]]
@@ -79,7 +76,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusU[1, 1:, :][maskpluvely[:-1, :]] = velU[:-1, :][maskpluvely[:-1, :]]**2 * rhoU[ :-1, :][maskpluvely[:-1, :]] + PU[:-1, :][maskpluvely[:-1, :]]
     FplusU[2, 1:, :][maskpluvely[:-1, :]] = velU[:-1, :][maskpluvely[:-1, :]] * (EintU[:-1, :][maskpluvely[:-1, :]] + PU[:-1, :][maskpluvely[:-1, :]])
 
-    # y direction
+    # right, x direction
         # negative velocity
     FminR[0, :, :-1][maskminvelx[:, 1:]] = velR[:, 1:][maskminvelx[:, 1:]]**2 * rhoR[ :, 1:][maskminvelx[:, 1:]]
     FminR[1, :, :-1][maskminvelx[:, 1:]] = velR[:, 1:][maskminvelx[:, 1:]]**2 * rhoR[ :, 1:][maskminvelx[:, 1:]] + PR[:, 1:][maskminvelx[:, 1:]]
@@ -100,7 +97,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
 
 
     #Then deal with the extrema at 0,0; 0,-1; -1,0 and -1,-1 for both matrices 
-        #negative velocity, x :
+        #negative velocity, y :
     FminD[0, -1, :][maskminvely[-1, :]] = velD[-1, :][maskminvely[-1, :]]**2 * rhoD[-1, :][maskminvely[-1, :]]
     FminD[1, -1, :][maskminvely[-1, :]] = velD[-1, :][maskminvely[-1, :]]**2 * rhoD[-1, :][maskminvely[-1, :]] + PD[-1, :][maskminvely[-1, :]]
     FminD[2, -1, :][maskminvely[-1, :]] = velD[-1, :][maskminvely[-1, :]] * (EintD[-1, :][maskminvely[-1, :]] + PD[-1, :][maskminvely[-1, :]])
@@ -109,7 +106,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FminU[1, -1, :][maskminvely[-1, :]] = velU[-1, :][maskminvely[-1, :]]**2 * rhoU[-1, :][maskminvely[-1, :]] + PU[-1, :][maskminvely[-1, :]]
     FminU[2, -1, :][maskminvely[-1, :]] = velU[-1, :][maskminvely[-1, :]] * (EintU[-1, :][maskminvely[-1, :]] + PU[-1, :][maskminvely[-1, :]])
 
-        #positive velocity, x
+        #positive velocity, y
     FplusD[0, 0, :][maskpluvely[0, :]] = velD[0, :][maskpluvely[0, :]]**2 * rhoD[0, :][maskpluvely[0, :]]
     FplusD[1, 0, :][maskpluvely[0, :]] = velD[0, :][maskpluvely[0, :]]**2 * rhoD[0, :][maskpluvely[0, :]] + PD[0, :][maskpluvely[0, :]]
     FplusD[2, 0, :][maskpluvely[0, :]] = velD[0, :][maskpluvely[0, :]] * (EintD[0, :][maskpluvely[0, :]] + PD[0, :][maskpluvely[0, :]])
@@ -118,7 +115,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusU[1, 0, :][maskpluvely[0, :]] = velU[0, :][maskpluvely[0, :]]**2 * rhoU[0, :][maskpluvely[0, :]] + PU[0, :][maskpluvely[0, :]]
     FplusU[2, 0, :][maskpluvely[0, :]] = velU[0, :][maskpluvely[0, :]] * (EintU[0, :][maskpluvely[0, :]] + PU[0, :][maskpluvely[0, :]])
 
-        #negative velocity, y :
+        #negative velocity, x :
     FminL[0, :, -1][maskminvelx[:, -1]] = velL[:, -1][maskminvelx[:, -1]]**2 * rhoL[:, -1][maskminvelx[:, -1]]
     FminL[1, :, -1][maskminvelx[:, -1]] = velL[:, -1][maskminvelx[:, -1]]**2 * rhoL[:, -1][maskminvelx[:, -1]] + PL[:, -1][maskminvelx[:, -1]]
     FminL[2, :, -1][maskminvelx[:, -1]] = velL[:, -1][maskminvelx[:, -1]] * (EintL[:, -1][maskminvelx[:, -1]] + PL[:, -1][maskminvelx[:, -1]])
@@ -127,7 +124,7 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FminR[1, :, -1][maskminvelx[:, -1]] = velR[:, -1][maskminvelx[:, -1]]**2 * rhoR[:, -1][maskminvelx[:, -1]] + PR[:, -1][maskminvelx[:, -1]]
     FminR[2, :, -1][maskminvelx[:, -1]] = velR[:, -1][maskminvelx[:, -1]] * (EintR[:, -1][maskminvelx[:, -1]] + PR[:, -1][maskminvelx[:, -1]])
 
-        #positive velocity, y:
+        #positive velocity, x:
     FplusL[0, :, 0][maskpluvelx[:, 0]] = velL[:, 0][maskpluvelx[:, 0]]**2 * rhoL[:, 0][maskpluvelx[:, 0]]
     FplusL[1, :, 0][maskpluvelx[:, 0]] = velL[:, 0][maskpluvelx[:, 0]]**2 * rhoL[:, 0][maskpluvelx[:, 0]] + PL[:, 0][maskpluvelx[:, 0]]
     FplusL[2, :, 0][maskpluvelx[:, 0]] = velL[:, 0][maskpluvelx[:, 0]] * (EintL[:, 0][maskpluvelx[:, 0]] + PL[:, 0][maskpluvelx[:, 0]])
@@ -137,6 +134,9 @@ def getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR,
     FplusR[2, :, 0][maskpluvelx[:, 0]] = velR[:, 0][maskpluvelx[:, 0]] * (EintR[:, 0][maskpluvelx[:, 0]] + PR[:, 0][maskpluvelx[:, 0]])
 
     return FplusL, FplusR, FminL, FminR, FplusD, FplusU, FminD, FminU
+
+
+
 
 ############################################################################################""
 def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, EintU, EintD, PL, PR, PU, PD, xcells, ycells):
@@ -153,13 +153,12 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UplusU = np.zeros((3, xcells, ycells))
 
     #masks to avoid loops:
-    maskminvelx = vel[1] < 0
-    maskminvely = vel[0] < 0
-    maskpluvelx = vel[1] >= 0
-    maskpluvely = vel[0] >= 0
+    maskminvelx = vel[0] < 0
+    maskminvely = vel[1] < 0
+    maskpluvelx = vel[0] >= 0
+    maskpluvely = vel[1] >= 0
 
-    #On the left
-    # x direction
+    # down, y direction
         #negative velocity
     UminD[0, :-1, :][maskminvely[1:, :]] = rhoD[1:, :][maskminvely[1:, :]]
     UminD[1, :-1, :][maskminvely[1:, :]] = velD[1:, :][maskminvely[1:, :]] * rhoD[1:, :][maskminvely[1:, :]]
@@ -178,7 +177,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UplusD[1, 1:, :][maskpluvely[:-1, :]] = velD[:-1, :][maskpluvely[:-1, :]] * rhoD[:-1, :][maskpluvely[:-1, :]]
     UplusD[2, 1:, :][maskpluvely[:-1, :]] = EintD[:-1, :][maskpluvely[:-1, :]]
 
-    # y direction
+    # left, x direction
         # negative velocity
     UminL[0, :, :-1][maskminvelx[:, 1:]] = rhoL[:, 1:][maskminvelx[:, 1:]]
     UminL[1, :, :-1][maskminvelx[:, 1:]] = velL[:, 1:][maskminvelx[:, 1:]] * rhoL[:, 1:][maskminvelx[:, 1:]]
@@ -198,8 +197,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UplusL[2, :, 1:][maskpluvelx[:, :-1]] = EintL[:, :-1][maskpluvelx[:, :-1]]
 
 
-    #On the right:
-    # x direction
+    # up, y direction
         #negative velocity
     UminU[0, :-1, :][maskminvely[1:, :]] = rhoU[ 1:, :][maskminvely[1:, :]]
     UminU[1, :-1, :][maskminvely[1:, :]] = velU[1:, :][maskminvely[1:, :]] * rhoU[ 1:, :][maskminvely[1:, :]]
@@ -218,7 +216,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UplusU[1, 1:, :][maskpluvely[:-1, :]] = velU[:-1, :][maskpluvely[:-1, :]] * rhoU[ :-1, :][maskpluvely[:-1, :]]
     UplusU[2, 1:, :][maskpluvely[:-1, :]] = EintU[:-1, :][maskpluvely[:-1, :]]
 
-    # y direction
+    # right, x direction
         # negative velocity
     UminR[0, :, :-1][maskminvelx[:, 1:]] = rhoR[ :, 1:][maskminvelx[:, 1:]]
     UminR[1, :, :-1][maskminvelx[:, 1:]] = velR[:, 1:][maskminvelx[:, 1:]] * rhoR[ :, 1:][maskminvelx[:, 1:]]
@@ -239,7 +237,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
 
 
     #Then deal with the extrema at 0 and -1 for both matrices 
-        #negative velocity, x :
+        #negative velocity, y :
     UminD[0, -1, :][maskminvely[-1, :]] = rhoD[-1, :][maskminvely[-1, :]]
     UminD[1, -1, :][maskminvely[-1, :]] = velD[-1, :][maskminvely[-1, :]] * rhoD[-1, :][maskminvely[-1, :]]
     UminD[2, -1, :][maskminvely[-1, :]] = EintD[-1, :][maskminvely[-1, :]]
@@ -248,7 +246,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UminU[1, -1, :][maskminvely[-1, :]] = velU[-1, :][maskminvely[-1, :]] * rhoU[-1, :][maskminvely[-1, :]]
     UminU[2, -1, :][maskminvely[-1, :]] = EintU[-1, :][maskminvely[-1, :]]
 
-        #positive velocity, x
+        #positive velocity, y
     UplusD[0, 0, :][maskpluvely[0, :]] = rhoD[0, :][maskpluvely[0, :]]
     UplusD[1, 0, :][maskpluvely[0, :]] = velD[0, :][maskpluvely[0, :]] * rhoD[0, :][maskpluvely[0, :]]
     UplusD[2, 0, :][maskpluvely[0, :]] = EintD[0, :][maskpluvely[0, :]]
@@ -257,7 +255,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UplusU[1, 0, :][maskpluvely[0, :]] = velU[0, :][maskpluvely[0, :]] * rhoU[0, :][maskpluvely[0, :]]
     UplusU[2, 0, :][maskpluvely[0, :]] = EintU[0, :][maskpluvely[0, :]]
 
-        #negative velocity, y :
+        #negative velocity, x :
     UminL[0, :, -1][maskminvelx[:, -1]] = rhoL[:, -1][maskminvelx[:, -1]]
     UminL[1, :, -1][maskminvelx[:, -1]] = velL[:, -1][maskminvelx[:, -1]] * rhoL[:, -1][maskminvelx[:, -1]]
     UminL[2, :, -1][maskminvelx[:, -1]] = EintL[:, -1][maskminvelx[:, -1]]
@@ -266,7 +264,7 @@ def getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, Ein
     UminR[1, :, -1][maskminvelx[:, -1]] = velR[:, -1][maskminvelx[:, -1]] * rhoR[:, -1][maskminvelx[:, -1]]
     UminR[2, :, -1][maskminvelx[:, -1]] = EintR[:, -1][maskminvelx[:, -1]]
 
-        #positive velocity, y:
+        #positive velocity, x:
     UplusL[0, :, 0][maskpluvelx[:, 0]] = rhoL[:, 0][maskpluvelx[:, 0]]
     UplusL[1, :, 0][maskpluvelx[:, 0]] = velL[:, 0][maskpluvelx[:, 0]] * rhoL[:, 0][maskpluvelx[:, 0]]
     UplusL[2, :, 0][maskpluvelx[:, 0]] = EintL[:, 0][maskpluvelx[:, 0]]

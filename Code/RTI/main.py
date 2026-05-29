@@ -21,7 +21,6 @@ print("time:", time)
 
 pos, g, rho, P, Eint, c_s, vel, lstx, lsty, dx, dy = initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind)
 U = ini_U(rho, vel, Eint, xcells, ycells, n_dim)
-quit()
 
 #Plot the initialisation
 fig, ax, img = ini_plot(rho, lstx, lsty, xcells, ycells, imagepath)
@@ -35,7 +34,7 @@ while time < tend:
     
     #Fluxes
     Fminx, Fminy, Fplusx, Fplusy = get_interface(rho, vel, Eint, xcells, ycells, n_dim, dx, dy, adiab_ind)
-    
+
     #S
     S = np.zeros((3, xcells, ycells))
     S[1,:,:] = rho*g
@@ -51,11 +50,15 @@ while time < tend:
 
     mask = (new_rho[0] == new_rho[1])
     notmask = (new_rho[0] != new_rho[1])
+    print(new_rho[0, 65:70, 150])
+    print(new_rho[1, 65:70, 150])
+    print(np.where(notmask==True))
+
     if mask.all() == True:
-        plotting(new_rho[0], fig, ax, img, n, imagepath)
+        plotting(new_rho[0], fig, ax, img, time, n, imagepath)
     else:
-        print("rho1", new_rho[0,notmask])
-        print("rho2", new_rho[1,notmask])
+        print("rho1", new_rho[0][notmask])
+        print("rho2", new_rho[1][notmask])
         print("There must be a mistake somewhere")
         quit()
 

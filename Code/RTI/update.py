@@ -29,23 +29,17 @@ def get_interface(rho, vel, Eint, xcells, ycells, n_dim, dx, dy, adiab_ind):
    c_sR = np.sqrt(adiab_ind * (PR/rhoR))
    c_sU = np.sqrt(adiab_ind * (PU/rhoU))
 
-   print("rho", rhoL[49:52, 149:152], rhoD[49:52, 149:152])
-   print("vel", velL[49:52, 149:152], velD[49:52, 149:152])
-   print("Eint", EintL[49:52, 149:152], EintD[49:52, 149:152])
-   print("P", PL[49:52, 149:152], PD[49:52, 149:152])
-   print("c_s", c_sL[49:52, 149:152], c_sD[49:52, 149:152])
-
 
    # Fluxes
    FplusL, FplusR, FminL, FminR, FplusD, FplusU, FminD, FminU = getFluxes(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, EintU, EintD, PL, PR, PU, PD, xcells, ycells)
             
 
    # Wave speeds
-   lamR = np.maximum(0, velR + c_sR**2, velL + c_sL**2)
-   lamL = np.minimum(0, velR - c_sR**2, velL - c_sL**2)
+   lamR = np.maximum(0, velR + c_sR, velL + c_sL)
+   lamL = np.minimum(0, velR - c_sR, velL - c_sL)
 
-   lamU = np.maximum(0, velU + c_sU**2, velD + c_sD**2)
-   lamD = np.minimum(0, velU - c_sU**2, velD - c_sD**2)
+   lamU = np.maximum(0, velU + c_sU, velD + c_sD)
+   lamD = np.minimum(0, velU - c_sU, velD - c_sD)
 
    # And the Us:
    UplusL, UplusR, UminL, UminR, UplusD, UplusU, UminD, UminU = getUs(vel, velL, velR, velU, velD, rhoL, rhoR, rhoU, rhoD, EintL, EintR, EintU, EintD, PL, PR, PU, PD, xcells, ycells)
@@ -56,10 +50,11 @@ def get_interface(rho, vel, Eint, xcells, ycells, n_dim, dx, dy, adiab_ind):
 
    Fplusx = (lamR * FplusL - lamL * FplusR + lamR * lamL * (UplusR - UplusL))/(lamR - lamL)
    Fplusy = (lamU * FplusD - lamD * FplusU + lamU * lamD * (UplusU - UplusD))/(lamU - lamD)
+   
    return Fminx, Fminy, Fplusx, Fplusy
 
 def get_newU(U, S, Fminx, Fminy, Fplusx, Fplusy, dt, dx, dy):
    """For a given previous U, S, fluxes in the y and x directions and interval in time,
    x and y, returns the new values for the concerved variables."""
-   newU = (-((Fplusx - Fminx)/dx - (Fplusy - Fminy)/dy) + S)*dt + U
+   newU = (-((Fplusx - Fminx)/dx + (Fplusy - Fminy)/dy) + S)*dt + U
    return newU

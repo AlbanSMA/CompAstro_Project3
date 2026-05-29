@@ -11,6 +11,6 @@ ycells = 300
 # Simulation:
 C = 0.25
 steps = 1600
-tend = 30
+tend = 15
 P0 = 2.5
 adiab_ind = 7/5
