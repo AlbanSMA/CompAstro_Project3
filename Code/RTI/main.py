@@ -19,8 +19,8 @@ os.mkdir(imagepath)
 time = 0
 print("time:", time)
 
-pos, g, rho, P, Eint, c_s, vel, lstx, lsty, dx, dy = initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind)
-U = ini_U(rho, vel, Eint, xcells, ycells, n_dim)
+pos, g, phi, rho, P, E, c_s, vel, lstx, lsty, dx, dy = initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind)
+U = ini_U(rho, vel, E, xcells, ycells, n_dim)
 
 #Plot the initialisation
 fig, ax, img = ini_plot(rho, lstx, lsty, xcells, ycells, imagepath)
@@ -28,45 +28,44 @@ fig, ax, img = ini_plot(rho, lstx, lsty, xcells, ycells, imagepath)
 n = 1
 while time < tend:
     #step dt and time
-    dt = C * min(dx, dy)/np.max(abs(vel+c_s)*n_dim)
+    dt = C * min(dx, dy)/(np.max(np.abs(vel+c_s))*n_dim)
     time = time+dt
-    print("time:", time)
+    print(n, "time:", time)
     
     #Fluxes
-    Fminx, Fminy, Fplusx, Fplusy = get_interface(rho, vel, Eint, xcells, ycells, n_dim, dx, dy, adiab_ind)
+    Fminx, Fminy, Fplusx, Fplusy = get_interface(rho, vel, E, phi, xcells, ycells, n_dim, dx, dy, adiab_ind)
 
     #S
-    S = np.zeros((3, xcells, ycells))
+    S = np.zeros((4, xcells, ycells))
     S[1,:,:] = rho*g
 
     #get the new values
     new_U = get_newU(U, S, Fminx, Fminy, Fplusx, Fplusy, dt, dx, dy)
+    new_U[:,:,0] = new_U[:,:,1]
+    new_U[:,:,-1] = new_U[:,:,-2]
+    new_U[:,0,:] = new_U[:,1,:]
+    new_U[:,-1,:] = new_U[:,-2,:]
 
-    new_rho = new_U[:,0,:,:]
-    new_vel = new_U[:,1,:,:]/new_rho
-    new_Eint = new_U[:,2,:,:]
-    new_P = new_Eint * new_rho * (adiab_ind - 1)
-    new_cs = np.sqrt(adiab_ind * (new_P/new_rho))
+    rho = new_U[0,:,:]
+    velx = new_U[1,:,:]/rho
+    vely = new_U[2,:,:]/rho
 
-    mask = (new_rho[0] == new_rho[1])
-    notmask = (new_rho[0] != new_rho[1])
-    print(new_rho[0, 65:70, 150])
-    print(new_rho[1, 65:70, 150])
-    print(np.where(notmask==True))
+    E = new_U[3,:,:]
+    Eint = (E/rho) - (velx**2 + vely**2)/2 - phi
 
-    if mask.all() == True:
-        plotting(new_rho[0], fig, ax, img, time, n, imagepath)
-    else:
-        print("rho1", new_rho[0][notmask])
-        print("rho2", new_rho[1][notmask])
-        print("There must be a mistake somewhere")
-        quit()
+    P = Eint * rho * (adiab_ind - 1)
+    
+    c_s = np.sqrt(adiab_ind * (P/rho))
+    print(Eint[Eint==np.min(Eint)], np.argwhere(Eint==np.min(Eint)))
+    print(P[P==np.min(P)], np.argwhere(P==np.min(P)))
+    print(rho[rho==np.min(rho)], np.argwhere(rho==np.min(rho)))
+
+
+    if n%4 == 0:
+        plotting(rho, fig, ax, img, time, n, imagepath)
 
     #Reinitialise
     n+=1
     U = new_U
-    rho = new_rho[0]
-    vel = new_vel
-    Eint = new_Eint[0]
-    P = new_P
-    c_s = new_cs
+    vel[0] = velx
+    vel[1] = vely

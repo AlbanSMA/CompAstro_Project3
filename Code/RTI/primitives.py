@@ -11,21 +11,17 @@ def getDensity(rho, n_dim, xcells, ycells, dx, dy):
         # get list of rho at m-1
     rhomm1 = np.zeros((n_dim, xcells, ycells))
             # y direction
-    rhomm1[1, -1, :] = rho[-1, :]
-    rhomm1[1, :-1, :] = rho[1:, :]
+    rhomm1[1] = np.roll(rho, -1, axis=0)
 
             # x direction
-    rhomm1[0, :, -1] = rho[:, -1]
-    rhomm1[0, :, :-1] = rho[:, 1:]
+    rhomm1[0] = np.roll(rho, -1, axis=1)
 
         # list of rho at m+1
     rhomp1 = np.zeros((n_dim, xcells, ycells))
             # y direction
-    rhomp1[1, 0, :] = rho[0, :]
-    rhomp1[1, 1:, :] = rho[:-1, :]
+    rhomp1[1] = np.roll(rho, 1, axis=0)
             # x direction
-    rhomp1[0, :, 0] = rho[:, 0]
-    rhomp1[0, :, 1:] = rho[:, :-1]
+    rhomp1[0] = np.roll(rho, 1, axis=1)
 
         # Then get the slopes (rho[0] == rho[1])
     pluslope, minslope = np.zeros((n_dim, xcells, ycells)), np.zeros((n_dim, xcells, ycells))
@@ -45,9 +41,9 @@ def getDensity(rho, n_dim, xcells, ycells, dx, dy):
 
     slope = np.zeros((n_dim, xcells, ycells))
             # this method is only used if they have the same signs
-    slope[masksamesign] = np.minimum(minslope[masksamesign], pluslope[masksamesign])
-    slope[0][maskdiffsign[0]] = (rhomp1[0][maskdiffsign[0]]-rhomm1[0][maskdiffsign[0]])
-    slope[1][maskdiffsign[1]] = (rhomp1[1][maskdiffsign[1]]-rhomm1[1][maskdiffsign[1]])
+    slope[masksamesign] = signmin[masksamesign]*np.minimum(np.abs(minslope[masksamesign]), np.abs(pluslope[masksamesign]))
+    slope[0][maskdiffsign[0]] = (rhomp1[0][maskdiffsign[0]] - rhomm1[0][maskdiffsign[0]])/2
+    slope[1][maskdiffsign[1]] = (rhomp1[1][maskdiffsign[1]] - rhomm1[1][maskdiffsign[1]])/2
 
     rhoD = rho + 0.5*slope[0]
     rhoL = rho + 0.5*slope[1]
@@ -67,29 +63,26 @@ def getVelocities(vel, n_dim, xcells, ycells, dx, dy):
     # Using the minmod method : 
         # get list of vel at m-1
     velmm1 = np.zeros((n_dim, xcells, ycells))
+            
             # y direction
-    velmm1[0, -1, :] = vel[0, -1, :]
-    velmm1[0, :-1, :] = vel[0, 1:, :]
+    velmm1[1] = np.roll(vel, -1, axis=0)
             # x direction
-    velmm1[1, :, 0] = vel[1, :, 0]
-    velmm1[1, :, :-1] = vel[1, :, 1:]
+    velmm1[0] = np.roll(vel, -1, axis=1)
 
         # list of vel at m+1
     velmp1 = np.zeros((n_dim, xcells, ycells))
             # y direction
-    velmp1[0, 0, :] = vel[0, 0, :]
-    velmp1[0, 1:, :] = vel[0, :-1, :]
+    velmp1[1] = np.roll(vel, 1, axis=0)
             # x direction
-    velmp1[1, :, 0] = vel[1, :, 0]
-    velmp1[1, :, 1:] = vel[1, :, :-1]
+    velmp1[0] = np.roll(vel, 1, axis=1)
 
         # Then get the slopes
     pluslope, minslope = np.zeros((n_dim, xcells, ycells)), np.zeros((n_dim, xcells, ycells))
-    minslope[0] = (vel[0] - velmm1[1])
-    pluslope[0] = (velmp1[1] - vel[0])
+    minslope[0] = (vel - velmm1[0])
+    pluslope[0] = (velmp1[0] - vel)
 
-    minslope[1] = (vel[1] - velmm1[0])
-    pluslope[1] = (velmp1[0] - vel[1])
+    minslope[1] = (vel - velmm1[1])
+    pluslope[1] = (velmp1[1] - vel)
 
         # Get the signes of the slopes
     signmin = np.sign(minslope)
@@ -98,17 +91,18 @@ def getVelocities(vel, n_dim, xcells, ycells, dx, dy):
         # Finally, obtain the slope
     masksamesign = (signmin == signplu)
     maskdiffsign = (signmin != signplu)
+
     slope = np.zeros((n_dim, xcells, ycells))
             # but this method only works if they have the same signs
-    slope[masksamesign] = np.minimum(minslope[masksamesign], pluslope[masksamesign])
-    slope[0][maskdiffsign[0]] = (velmp1[0][maskdiffsign[0]]-velmm1[0][maskdiffsign[0]])
-    slope[1][maskdiffsign[1]] = (velmp1[1][maskdiffsign[1]]-velmm1[1][maskdiffsign[1]])
+    slope[masksamesign] = signmin[masksamesign]*np.minimum(np.abs(minslope[masksamesign]), np.abs(pluslope[masksamesign]))
+    slope[0][maskdiffsign[0]] = (velmp1[0][maskdiffsign[0]] - velmm1[0][maskdiffsign[0]])/2
+    slope[1][maskdiffsign[1]] = (velmp1[1][maskdiffsign[1]] - velmm1[1][maskdiffsign[1]])/2
 
-    velL = vel[0] + 0.5*slope[0]
-    velD = vel[1] + 0.5*slope[1]
+    velL = vel + 0.5*slope[0]
+    velD = vel + 0.5*slope[1]
 
-    velR = vel[0] - 0.5*slope[0]
-    velU = vel[1] - 0.5*slope[1]
+    velR = vel - 0.5*slope[0]
+    velU = vel - 0.5*slope[1]
     return velL, velR, velD, velU
 
 def getEnergies(Eint, n_dim, xcells, ycells, dx, dy):
@@ -122,21 +116,17 @@ def getEnergies(Eint, n_dim, xcells, ycells, dx, dy):
         # get list of Eint at m-1
     Eintmm1 = np.zeros((n_dim, xcells, ycells))
             # y direction
-    Eintmm1[1, -1, :] = Eint[-1, :]
-    Eintmm1[1, :-1, :] = Eint[1:, :]
+    Eintmm1[1] = np.roll(Eint, -1, axis=0)
 
             # x direction
-    Eintmm1[0, :, -1] = Eint[:, -1]
-    Eintmm1[0, :, :-1] = Eint[:, 1:]
+    Eintmm1[0] = np.roll(Eint, -1, axis=1)
 
         # list of Eint at m+1
     Eintmp1 = np.zeros((n_dim, xcells, ycells))
             # y direction
-    Eintmp1[1, 0, :] = Eint[0, :]
-    Eintmp1[1, 1:, :] = Eint[:-1, :]
+    Eintmp1[1] = np.roll(Eint, 1, axis=0)
             # x direction
-    Eintmp1[0, :, 0] = Eint[:, 0]
-    Eintmp1[0, :, 1:] = Eint[:, :-1]
+    Eintmp1[0] = np.roll(Eint, 1, axis=1)
 
         # Then get the slopes (Eint[0] == Eint[1])
     pluslope, minslope = np.zeros((n_dim, xcells, ycells)), np.zeros((n_dim, xcells, ycells))
@@ -156,9 +146,9 @@ def getEnergies(Eint, n_dim, xcells, ycells, dx, dy):
 
     slope = np.zeros((n_dim, xcells, ycells))
             # this method is only used if they have the same signs
-    slope[masksamesign] = np.minimum(minslope[masksamesign], pluslope[masksamesign])
-    slope[0][maskdiffsign[0]] = (Eintmp1[0][maskdiffsign[0]]-Eintmm1[0][maskdiffsign[0]])
-    slope[1][maskdiffsign[1]] = (Eintmp1[1][maskdiffsign[1]]-Eintmm1[1][maskdiffsign[1]])
+    slope[masksamesign] = signmin[masksamesign]*np.minimum(np.abs(minslope[masksamesign]), np.abs(pluslope[masksamesign]))
+    slope[0][maskdiffsign[0]] = (Eintmp1[0][maskdiffsign[0]] - Eintmm1[0][maskdiffsign[0]])/2
+    slope[1][maskdiffsign[1]] = (Eintmp1[1][maskdiffsign[1]] - Eintmm1[1][maskdiffsign[1]])/2
 
     EintD = Eint + 0.5*slope[0]
     EintL = Eint + 0.5*slope[1]

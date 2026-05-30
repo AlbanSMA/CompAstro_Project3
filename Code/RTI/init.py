@@ -12,25 +12,23 @@ def initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind):
     dx = lstx[1] - lstx[0]
     dy = lsty[1] - lsty[0]
 
-    pos[0] = np.outer(lstx, np.ones(ycells)).reshape(xcells, ycells)
-    pos[1] = np.outer(np.ones(xcells), lsty).reshape(xcells, ycells)
+    pos[0] = lstx[:, None]
+    pos[1] = lsty[None, :]
 
     # Gravity :
+    phi = 0.1*pos[1]
     g = -0.1*pos[1]
 
     # Density :
-    mask1 = (pos[1,:,:] < 0)
-    mask2 = (pos[1,:,:] > 0)
+    mask1 = (pos[1,:,:] > 0)
+    mask2 = (pos[1,:,:] < 0)
 
     rho = np.zeros((xcells, ycells))
     rho[mask1] = 1
     rho[mask2] = 2
 
     # Pressure
-    P = P0 - g*rho
-
-    # Internal energy
-    Eint = P/(rho*(adiab_ind - 1))
+    P = P0 - phi*rho
     
     # Sound speed
     c_s = np.sqrt((adiab_ind*P)/rho)
@@ -38,14 +36,19 @@ def initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind):
     # Velocity field:
     vel = np.zeros((n_dim, xcells, ycells))
     vel[1] = (0.01*(1 + np.cos(4*np.pi*pos[0])) * (1 + np.cos(3*np.pi*pos[1])))/4
-    return pos, g, rho, P, Eint, c_s, vel, lstx, lsty, dx, dy
+    
+    # Internal energy and energy
+    Eint = P/(rho*(adiab_ind - 1))
+    E = rho * ((vel[0]**2 + vel[1]**2)/2 + Eint + phi)
+    return pos, g, phi, rho, P, E, c_s, vel, lstx, lsty, dx, dy
 
 
-def ini_U(rho, vel, Eint, xcells, ycells, n_dim):
+def ini_U(rho, vel, E, xcells, ycells, n_dim):
     """For a given density, velocity and internal energy, returns the initial
     values of U"""
-    U = np.zeros((n_dim, 3, xcells, ycells))
-    U[:,0,:,:] = rho
-    U[:,1,:,:] = rho*vel
-    U[:,2,:,:] = Eint
+    U = np.zeros((4, xcells, ycells))
+    U[0,:,:] = rho
+    U[1,:,:] = rho*vel[0]
+    U[2,:,:] = rho*vel[1]
+    U[3,:,:] = E
     return U

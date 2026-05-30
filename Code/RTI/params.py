@@ -5,8 +5,8 @@ folder = "Sim_plots"
 n_dim = 2
 xdim = [-0.25, 0.25]
 ydim = [-0.75, 0.75]
-xcells = 100
-ycells = 300
+xcells = 102
+ycells = 302
 
 # Simulation:
 C = 0.25
