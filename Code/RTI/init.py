@@ -17,11 +17,11 @@ def initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind):
 
     # Gravity :
     phi = 0.1*pos[1]
-    g = -0.1*pos[1]
+    g = -0.1
 
     # Density :
-    mask1 = (pos[1,:,:] > 0)
-    mask2 = (pos[1,:,:] < 0)
+    mask1 = (pos[1,:,:] < 0)
+    mask2 = (pos[1,:,:] > 0)
 
     rho = np.zeros((xcells, ycells))
     rho[mask1] = 1
@@ -35,15 +35,15 @@ def initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind):
 
     # Velocity field:
     vel = np.zeros((n_dim, xcells, ycells))
-    vel[1] = (0.01*(1 + np.cos(4*np.pi*pos[0])) * (1 + np.cos(3*np.pi*pos[1])))/4
-    
+    vel[1] = 0.1 * (1 + np.cos(4*np.pi*pos[0])) * (1 + np.cos(3*np.pi*pos[1]))/4
+
     # Internal energy and energy
     Eint = P/(rho*(adiab_ind - 1))
     E = rho * ((vel[0]**2 + vel[1]**2)/2 + Eint + phi)
-    return pos, g, phi, rho, P, E, c_s, vel, lstx, lsty, dx, dy
+    return pos, g, phi, rho, P, E, Eint, c_s, vel, lstx, lsty, dx, dy
 
 
-def ini_U(rho, vel, E, xcells, ycells, n_dim):
+def ini_U(rho, vel, E, xcells, ycells):
     """For a given density, velocity and internal energy, returns the initial
     values of U"""
     U = np.zeros((4, xcells, ycells))

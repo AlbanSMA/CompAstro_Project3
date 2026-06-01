@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.21)  28 MAY 2026 13:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.21)  1 JUN 2026 17:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -602,15 +602,15 @@ Package hyperref Info: Link coloring ON on input line 38.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(80.0pt, 437.50787pt, 80.0pt)
-* v-part:(T,H,B)=(80.0pt, 685.04684pt, 80.0pt)
+* h-part:(L,W,R)=(60.0pt, 477.50787pt, 60.0pt)
+* v-part:(T,H,B)=(60.0pt, 725.04684pt, 60.0pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=437.50787pt
-* \textheight=685.04684pt
-* \oddsidemargin=7.73001pt
-* \evensidemargin=7.73001pt
-* \topmargin=-29.26999pt
+* \textwidth=477.50787pt
+* \textheight=725.04684pt
+* \oddsidemargin=-12.26999pt
+* \evensidemargin=-12.26999pt
+* \topmargin=-49.26999pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -630,34 +630,40 @@ Package hyperref Info: Link coloring ON on input line 38.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-
-LaTeX Warning: Empty bibliography on input line 74.
-
 [1
 
-{C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.aux)
+{C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+Overfull \hbox (6.24191pt too wide) detected at line 195
+[][][]\OML/cmm/m/it/12 U[] \OT1/cmr/m/n/12 = [\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 ([] + []) + []] \OMS/cmsy/m/n/12 ^^A \OT1/cmr/m/n/12 ^^A\OML/cmm/m/it/12 t \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 U[]
+ []
+
+[3]
+
+LaTeX Warning: Empty bibliography on input line 211.
+
+[4] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 500E09B62831E14612A1ECC1CDD5FF6C;440.
+(rerunfilecheck)             Checksum: C961483D40C492193621FC21B966D421;707.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18923 strings out of 467690
- 337386 string characters out of 5415450
- 1285504 words of memory out of 5000000
- 47808 multiletter control sequences out of 15000+600000
- 630288 words of font info for 49 fonts, out of 8000000 for 9000
+ 19001 strings out of 467690
+ 338353 string characters out of 5415450
+ 1304190 words of memory out of 5000000
+ 47857 multiletter control sequences out of 15000+600000
+ 635471 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,6n,67p,794b,5052s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on main.pdf (1 page, 31702 bytes).
+ 63i,21n,67p,1326b,5052s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (4 pages, 157814 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 7 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 142 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

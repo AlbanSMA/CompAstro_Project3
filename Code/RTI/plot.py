@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 
 from matplotlib import cm
 
-def ini_plot(rho, lstx, lsty, xcells, ycells, imagepath):
+def ini_plot(var, lstx, lsty, xcells, ycells, imagepath):
     """For a given map of rho and the path to save the image to, creates a plot
     and saves it."""
 
     # plot the data
     fig, ax = plt.subplots(1,1)
 
-    img = ax.imshow(rho, cmap="viridis")
+    img = ax.imshow(var, cmap="viridis")
 
     # set the location labels on the axis
     ax.set_yticks(np.linspace(0, xcells, 5))
@@ -30,12 +30,12 @@ def ini_plot(rho, lstx, lsty, xcells, ycells, imagepath):
     return fig, ax, img
 
 
-def plotting(rho, fig, ax, img, time, n, imagepath):
+def plotting(var, fig, ax, img, time, n, imagepath):
     """For a given updated rho at timestep n, updates plot ax and saves it to 
     imagepath"""
 
-    img.set_data(rho)
-    ax.set_title(f"time {time}")
+    img.set_data(var)
+    ax.set_title(f"time {time:.5e}")
 
     fig.canvas.draw()
     fig.canvas.flush_events()

@@ -1,31 +1,31 @@
 import numpy as np
-from primitives import getDensity, getVelocities, getEnergies
+from primitives import getPrimitive
 from UsandFs import getFluxes, getUs
 
-def get_interface(rho, vel, Eint, phi, xcells, ycells, n_dim, dx, dy, adiab_ind):
+def get_interface(rho, vel, Eint, phi, xcells, ycells, n_dim, adiab_ind):
    """Given the current density and velocity of the fluid, get the flux at the 
    interfaces: left and right in x, up and down in y."""
 
    # First the primitive variables
       # Density:
-   rhoL, rhoR, rhoD, rhoU = getDensity(rho, n_dim, xcells, ycells, dx, dy)
+   rhoL, rhoR, rhoD, rhoU = getPrimitive(rho, n_dim, xcells, ycells)
 
       # Velocities
-   velLx, velRx, velDx, velUx = getVelocities(vel[0], n_dim, xcells, ycells, dx, dy)
-   velLy, velRy, velDy, velUy = getVelocities(vel[1], n_dim, xcells, ycells, dx, dy)
+   velLx, velRx, velDx, velUx = getPrimitive(vel[0], n_dim, xcells, ycells)
+   velLy, velRy, velDy, velUy = getPrimitive(vel[1], n_dim, xcells, ycells)
 
       #and magnitudes to calculate the energies:
-   velL2 = velLx**2 + velLy**2
-   velR2 = velRx**2 + velRy**2
-   velD2 = velDx**2 + velDy**2
-   velU2 = velUx**2 + velUy**2
+   velL2 = (velLx**2 + velLy**2)
+   velR2 = (velRx**2 + velRy**2)
+   velD2 = (velDx**2 + velDy**2)
+   velU2 = (velUx**2 + velUy**2)
 
       # Energy
-   EintL, EintR, EintD, EintU = getEnergies(Eint, n_dim, xcells, ycells, dx, dy)
-   EL = rhoL * (velL2/2 + Eint + phi)
-   ER = rhoL * (velR2/2 + Eint + phi)
-   ED = rhoL * (velD2/2 + Eint + phi)
-   EU = rhoL * (velU2/2 + Eint + phi)
+   EintL, EintR, EintD, EintU = getPrimitive(Eint, n_dim, xcells, ycells)
+   EL = rhoL * (velL2/2 + EintL + phi)
+   ER = rhoR * (velR2/2 + EintR + phi)
+   ED = rhoD * (velD2/2 + EintD + phi)
+   EU = rhoU * (velU2/2 + EintU + phi)
 
       # Pressure 
    PL = rhoL * EintL * (adiab_ind - 1)
@@ -40,7 +40,7 @@ def get_interface(rho, vel, Eint, phi, xcells, ycells, n_dim, dx, dy, adiab_ind)
    c_sU = np.sqrt(adiab_ind * (PU/rhoU))
 
    # Fluxes
-   FplusL, FplusR, FminL, FminR, FplusD, FplusU, FminD, FminU = getFluxes(vel, velLx, velRx, velUx, velDx, velLy, velRy, velUy, velDy, rhoL, rhoR, rhoU, rhoD, EL, ER, EU, ED, PL, PR, PU, PD, xcells, ycells)
+   FplusL, FplusR, FminL, FminR, FplusD, FplusU, FminD, FminU = getFluxes(velLx, velRx, velUx, velDx, velLy, velRy, velUy, velDy, rhoL, rhoR, rhoU, rhoD, EL, ER, EU, ED, PL, PR, PU, PD, xcells, ycells)
 
    # Wave speeds
    lamR = np.maximum(0, np.maximum(velRx + c_sR, velLx + c_sL))
@@ -50,7 +50,7 @@ def get_interface(rho, vel, Eint, phi, xcells, ycells, n_dim, dx, dy, adiab_ind)
    lamD = np.minimum(0, np.minimum(velUy - c_sU, velDy - c_sD))
 
    # And the Us:
-   UplusL, UplusR, UminL, UminR, UplusD, UplusU, UminD, UminU = getUs(vel, velLx, velRx, velUx, velDx, velLy, velRy, velUy, velDy, rhoL, rhoR, rhoU, rhoD, EL, ER, EU, ED, xcells, ycells)
+   UplusL, UplusR, UminL, UminR, UplusD, UplusU, UminD, UminU = getUs(velLx, velRx, velUx, velDx, velLy, velRy, velUy, velDy, rhoL, rhoR, rhoU, rhoD, EL, ER, EU, ED, xcells, ycells)
 
    # And finally, the actual summed fluxes
    lamdiffx = lamR - lamL
@@ -71,3 +71,18 @@ def get_newU(U, S, Fminx, Fminy, Fplusx, Fplusy, dt, dx, dy):
    x and y, returns the new values for the concerved variables."""
    newU = (-((Fplusx - Fminx)/dx + (Fplusy - Fminy)/dy) + S)*dt + U
    return newU
+
+def getBoundaries(array):
+   """Updates the boundaries with x periodic, and y reflective"""
+       #Get the boundaries
+    #x : periodic
+   array[:,0,:] = array[:,-2,:]
+   array[:,-1,:] = array[:,1,:]
+
+    #y : reflective
+   array[:,:,0] = array[:,:,1]
+   array[:,:,-1] = array[:,:,-2]
+   array[2,:,0] = -array[2,:,0].copy()
+   array[2,:,-1] = -array[2,:,-1].copy()
+   
+   return array

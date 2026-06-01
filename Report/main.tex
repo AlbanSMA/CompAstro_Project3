@@ -19,10 +19,10 @@
   {\usebibmacro{postnote}}
 
 \usepackage{geometry}
-\geometry{tmargin = 80pt, 
-          rmargin = 80pt, 
-          lmargin = 80pt, 
-          bmargin = 80pt}
+\geometry{tmargin = 60pt, 
+          rmargin = 60pt, 
+          lmargin = 60pt, 
+          bmargin = 60pt}
 
 \usepackage{amsmath}
 \usepackage{verbatim}
@@ -40,27 +40,164 @@
 
 \section{Introduction}
 \label{sec:intro}
-While most fluid movements in astrophysical hydrodynamics can be brought down to a few conceptually simple instabilities, the way the fluids evolve due to these instability is not simple.
+Instabilities in atrophysics shape a large part of the Universe. They influence the evolution of gas clouds into galaxies, stars and planets, along with many other events, some of them less smooth such as supernovae or jets. On smaller scales, the same instabilities influence Earth, such as waves in the oceans, or some clouds. While most of them can be brought down to a few conceptually simple instabilities, the hydrodynamics created by these instabilities are not as simple.
 
 \section{Method}
 \label{sec:meth}
+\subsection{Hydrodynamics}
+\label{subsec:hydrodyn}
+To model the evolution of fluids, the first important points are the Euler equations and the equation of state of a system, which governs how the system evolve with time and space. Here, we assume an adiabatic equation of state : $P=K\rho^\gamma$, where gamma is the adiabatic index. There are three Euler equations, the continuity equation (eq. \ref{eq:cont}), which deals with the density displacement,
+\begin{equation}
+  \label{eq:cont}
+  \frac{\partial \rho}{\partial t} + \partial_i(\rho u_i) = 0,
+\end{equation}
 
-\begin{comment}
-- 2D
-- 2 cases of common instabilities : RT and KH
-- implement Euler's equations in both dx and dy
-- dt = C*min(dx, dy)/max(|u+c_s|*D), D is dim number
-- if can, want us to do it in compiled language
+the momentum equation (eq. \ref{eq:mom}), which deals with the momentum displacement,
+\begin{equation}
+  \label{eq:mom}
+  \partial_t(\rho u_j) + \partial_i\rho u_iu_j + \delta_{ij}P = \rho g_j,
+\end{equation}
 
-- RTI :
-  - dense fluid next to less dense fluid
-  - both have // adiab index
-  - external grav filed w/ dir so dense fluid "on top"
-  - P chosen so fluid = hydrosttc eq
-  - means : low rho fluid below interface : higher U than dense fluid
-        above interface
-    
-\end{comment}
+
+and finally, the energy equation (eq. \ref{eq:ene}), which as its name indicates deals with the change in energy.
+\begin{equation}
+  \label{eq:ene}
+  \frac{\partial E}{\partial t} + \partial_i[(E+P)u_i] = 0.
+\end{equation}
+
+This set of equations can be written as only one, which makes its use in numerical simulations slightly easier. This is equation \ref{eq:comp},
+\begin{equation}
+  \label{eq:comp}
+  \frac{\partial \mathbf{U}}{\partial t} + \frac{\partial \mathbf{F_i(U)}}{\partial x_i} = \mathbf{S(U)},
+\end{equation}
+in which \textbf{U} are the conserved variables, $\mathbf{U} = [\rho, \rho u_j, E]$, $\mathbf{F_i(U)}$ are the variables which go into the gradients, $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$, and \textbf{S} are the additional forces such as viscosity or gravity which could impact the fluid. Here, these are only the gravity, so $\mathbf{S(U)} = [0, \rho g_j, 0]$. 
+
+In addition to these equations, the sound speed (eq. \ref{eq:c_s}),
+\begin{equation}
+  \label{eq:c_s}
+  c_s = \gamma P/\rho,
+\end{equation}
+
+is needed to determine some of the movements. The pressure of the fluid is also derived from numerically evolved quantities (eq. \ref{eq:P}),
+\begin{equation}
+  \label{eq:P}
+  P = \rho\epsilon(\gamma-1).
+\end{equation} 
+
+Both the equations for the pressure and the sound speed originate from the equation of state, while the total energy is found from the numerically evolved velocity and internal energy (eq. \ref{eq:E}),
+\begin{equation}
+  \label{eq:E}
+  E = \rho(u^2/2 + \epsilon + \phi).
+\end{equation}
+
+In this particular report, we model two instabilities, as described in the \nameref{sec:intro}. They have slightly different initial conditions to allow for the instabilities to develop. These instabilities are the Rayleigh-Taylor instability, which arrises when a denser fluid is pushed by gravity towards a less dense one, and the Kelvin-Helmholtz instability, which develops when two fluids move in contact with each others at different velocities. Thus, the RTI instability is modelled in a rectangular box with the y direction about three times as large as the x direction. The gravitational potential is $\phi = 0.1y$, such that the gravitational acceleration is $\vec{g} = -0.1\hat{y}$. Density is set up such that the "top" fluid (above y=0) is $\rho=2$, and the "bottom" fluid (bellow y=0) is $\rho=1$, then $P = P_0 - \phi \rho$, where $P_0$ is simply $P_0=2.5$. Finally, the adiabatic index is $\gamma = 7/5 = 1.4$, which corresponds to a diatomic gas. We add a small starting velocity in the y direction $v_y = 0.01\cdot[1 + \cos(4\pi x)]\cdot[1+\cos(3\pi y)]/4$ to perturbate the fluids initially. This is summarised in table \ref{tab:ini_condRTI}.
+
+\begin{table}[t!]
+  \centering
+  \begin{tabular}{c|c}
+    Parameter & Value\\
+    \hline
+    \hline
+    Gravitational potential & $\phi = 0.1y$\\
+    Gravitational acceleration & $g = -0.1\hat{y}$\\
+    \hline
+    Density & $\rho = \begin{cases}\rho = 2 & \textrm{if y $>$ 0},\\
+      \rho = 1 & \textrm{if y $<$ 0}.
+    \end{cases}$\\
+    Pressure & $P = P_0 - \phi\rho$, $P_0 = 2.5$\\
+    Adiabatic index & $\gamma = 7/5 = 1.4$\\
+    \hline
+    Velocity & $\begin{cases}
+      v_x = 0\\
+      v_y = 0.01\cdot[1 + \cos(4\pi x)]\cdot[1+\cos(3\pi y)]/4
+    \end{cases}$\\
+    \hline\hline
+  \end{tabular}
+  \caption{Initial parameters of the RTI simulation}
+  \label{tab:ini_condRTI}
+\end{table}
+
+The KHI is modelled in a square box, with no gravitational potential nor acceleration. The adiabatic index is $\gamma = 5/3$, which corresponds to a monoatomic gas, and the pressure constant everywhere at $P=2.5$. Both the density (eq. \ref{eq:density}),
+\begin{equation}
+  \label{eq:density}
+  \rho(x, y) = \begin{cases}
+    \rho_1 - \rho_m \exp((y-1/4)\cdot L) & \textrm{if $0 \leq y \leq 1/4$}\\
+    \rho_2 + \rho_m \exp((-y+1/4)\cdot L) & \textrm{if $1/4 \leq y \leq 1/2$}\\
+    \rho_2 + \rho_m \exp(-(3/4 - y)\cdot L) & \textrm{if $1/2 \leq y \leq 3/4$}\\
+    \rho_1 - \rho_m \exp(-(y-3/4)\cdot L) & \textrm{if $3/4 \leq y \leq 1$}
+  \end{cases},
+\end{equation}
+
+where $\rho_1 =1$, $\rho_2=2$ and $\rho_m = (\rho_1 - \rho_2)/2$, with $L=0.025$, and the velocity (eq. \ref{eq:velocity1} and \ref{eq:velocity2}),
+\begin{equation}
+  \label{eq:velocity1}
+  v_x(x,y) = \begin{cases}
+    U_1 - U_m\exp((y-1/4)/L) & \textrm{if $0 \leq y \leq 1/4$}\\
+    U_2 + U_m\exp((-y+1/4)/L) & \textrm{if $1/4 \leq y \leq 1/2$}\\
+    U_2 + U_m\exp(-(3/4-y)/L) & \textrm{if $1/2 \leq y \leq 3/4$}\\
+    U_1 - U_m\exp(-(y-3/4)/L) & \textrm{if $3/4 \leq y \leq 1$}
+  \end{cases},
+\end{equation}
+where $U_1 =0.5$, $U_2=-0.5$, $U_m=(U_1 - U_2)/2$ and $L = 0.025$,
+
+\begin{equation}
+  \label{eq:velocity2}
+  v_y(x,y) = 0.01sin(4\pi x),
+\end{equation}
+have much more complex initialisation than for the RTI simulation. These parameters are summarised in table \ref{tab:ini_condKHI}.
+
+\begin{table}[t!]
+  \centering
+  \begin{tabular}{c|c}
+    Parameter & Value\\
+    \hline
+    \hline
+    Gravitational potential & $\phi = 0$\\
+    Gravitational acceleration & $g = 0$\\
+    \hline
+    Density & $\rho(x, y) = \begin{cases}
+    \rho_1 - \rho_m \exp((y-1/4)\cdot L) & \textrm{if $0 \leq y \leq 1/4$}\\
+    \rho_2 + \rho_m \exp((-y+1/4)\cdot L) & \textrm{if $1/4 \leq y \leq 1/2$}\\
+    \rho_2 + \rho_m \exp(-(3/4 - y)\cdot L) & \textrm{if $1/2 \leq y \leq 3/4$}\\
+    \rho_1 - \rho_m \exp(-(y-3/4)\cdot L) & \textrm{if $3/4 \leq y \leq 1$}
+  \end{cases}$\\
+  \hline
+    Pressure & $P = 2.5$\\
+    Adiabatic index & $\gamma = 5/3$\\
+    \hline
+    Velocity & $v_x(x,y) = \begin{cases}
+    U_1 - U_m\exp((y-1/4)/L) & \textrm{if $0 \leq y \leq 1/4$}\\
+    U_2 + U_m\exp((-y+1/4)/L) & \textrm{if $1/4 \leq y \leq 1/2$}\\
+    U_2 + U_m\exp(-(3/4-y)/L) & \textrm{if $1/2 \leq y \leq 3/4$}\\
+    U_1 - U_m\exp(-(y-3/4)/L) & \textrm{if $3/4 \leq y \leq 1$}
+  \end{cases}$\\
+    & $v_y(x,y) = 0.01sin(4\pi x)$\\
+    \hline\hline
+  \end{tabular}
+  \caption{Initial parameters of the KHI simulation}
+  \label{tab:ini_condKHI}
+\end{table}
+
+\subsection{Numerical methods}
+\label{subsec:nummeth}
+The first step for the simulations is to find the primitive variables, $\rho$, $u_j$, P, $\epsilon$ and $\phi$ at the boundaries. This is done by calculating two slopes for each cells : $(\rho_{m+1} - \rho_m)/\Delta x$ and $(\rho_m - \rho_{m-1})/\Delta x$. If they both have the same sign, then the slope closest to 0 is used. If they differ, then piecewise reconstruction is used, simply using $(\rho_{m+1} - \rho{m-1})/2\Delta x$ as a slope. The resulting variable at the boundary is the variable in the center of the cell plus 0.5 times the slope. The pressure and the sound speed can be found from the other variables, along with the total energy, and $\phi$ does not change from one time step to the next. Using these variables, we can calculate the fluxes through each boundaries for each cell. These fluxes, $\mathbf{F(U)}$ in the compact form of the Euler equation, are $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$. Because of the way the variables at the boundary are found, there can be a discrepancy between the values at a same boundary for different cells. We use the HLLE approximation (eq. \ref{eq:HLLE}) to solve this problem, called the Riemann problem. 
+\begin{equation}
+  \label{eq:HLLE}
+  [\mathbf{F_x(U)}]^{(n)}_{m+1/2} = \frac{\lambda_R\mathbf{F_x(U)}(p^{L,n}_{m+1/2}) - \lambda_L\mathbf{F_x(U)}(p^{R, n}_{m+1/2}) + \lambda_R\lambda_L(\mathbf{U}(p^{R,n}_{m+1/2}) - \mathbf{U}(p^{L,n}_{m+1/2}))}{\lambda_R - \lambda_L}
+\end{equation}
+
+Where $\lambda_R$ and $\lambda_R$ are the wave speeds, taken as $\lambda_R = max(0, u_R+c_{s,R}, u_L + c_{s,L})$ and $\lambda_L = min(0, u_R+c_{s,R}, u_L + c_{s,L})$. We cap the difference of $\lambda_R-\lambda_L$ at $10^{-12}$ to make sure that small numerical error which could make it zero do not break the model. 
+
+Finally, the updated conserved variables $\mathbf{U}$ can be found from these fluxes and the additional forces $\mathbf{S(U)}$ (see \nameref{subsec:hydrodyn}). This is the equation \ref{eq:Un+1}.
+\begin{equation}
+  \label{eq:Un+1}
+  U^{(n+1)}_m = [-(\frac{[\mathbf{F_x(U)}]^{(n)}_{m+1/2} - [\mathbf{F_x(U)}]^{(n)}_{m-1/2}}{\Delta x} + \frac{[\mathbf{F_y(U)}]^{(n)}_{m+1/2} - [\mathbf{F_y(U)}]^{(n)}_{m-1/2}}{\Delta y}) + \mathbf{S(U_m^{(n)})}] \cdot \Delta t + U_m^{(n)}
+\end{equation}
+
+Finally, we also use a dynamical timestep wich depends mainly on the velocity and sound speed within the cells : $\Delta t = C \frac{\min(\Delta x, \Delta y)}{\max(|u + c_s)}\cdot D$, with D the number of dimensions. 
+
+The accuracy of the evolution in time is also improved by using Runge-Kutta method. The variables are first found for half a time step, before being reinserted into the program to find the fluxes at the full time step from them. The actual variables are found from these fluxes.
+
 
 \section{Results}
 \label{sec:res}

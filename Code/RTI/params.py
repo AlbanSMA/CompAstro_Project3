@@ -9,6 +9,7 @@ xcells = 102
 ycells = 302
 
 # Simulation:
+stages = 2
 C = 0.25
 steps = 1600
 tend = 15
