@@ -29,7 +29,7 @@
 \usepackage{wrapfig}
 \usepackage[font=small]{caption}
 
-%\bibliography{ref.bib}
+\bibliography{ref.bib}
 
 \title{}
 \author{Anvel (Marguerite) de Sainte Marie d'Agneaux}
@@ -40,19 +40,31 @@
 
 \section{Introduction}
 \label{sec:intro}
-Instabilities in atrophysics shape a large part of the Universe. They influence the evolution of gas clouds into galaxies, stars and planets, along with many other events, some of them less smooth such as supernovae or jets. On smaller scales, the same instabilities influence Earth, such as waves in the oceans, or some clouds. While most of them can be brought down to a few conceptually simple instabilities, the hydrodynamics created by these instabilities are not as simple.
+Instabilities shape a large part of the Universe. They influence the evolution of gas clouds into galaxies, stars and planets, along with more impulsive events such as supernovae or jets \parencite{zhou_rayleightaylor_2021}. On smaller scales, the same instabilities influence Earth, such as waves in the oceans and effects in the magnetosphere and ionosphere. While most of them can be sorted into a few conceptually simple classes, the hydrodynamics they create are not simple.
+
+\citeauthor{trussoni_kelvinhelmholtz_2008} (\citedatelink{trussoni_kelvinhelmholtz_2008}) defines an instability as a reaction to an external perturbation which definitely modifies its structure through an energy transfer. This is the case for both Kelvin-Helmholtz (KHI) and Rayleigh-Taylor instabilities (RTI). In the case of RTI, a denser fluid and a less dense fluid share an interface. The energy which introduces the perturbation are gravitational forces, which push the denser fluid toward the less dense fluid. It caves the interface towards the denser fluid in some parts and the less dense fluid in others, forming characteristic shapes which resemble fingers \parencite{zhou_rayleightaylor_2021}. Richtmyer-Meshkov instabilities (RMI) are seen as a particular case of Rayleigh-Taylor instabilities, in which the perturbations start due to a shock-wave instead of a constant or mostly constant gravitational force. Because of this, RTI are only unstable if the gravitational force is in the right direction, placing the denser fluid "above", while RMI are always unstable independently of the direction of the shock-wave \parencite{zhou_rayleightaylor_2021}. As we will see in \nameref{sec:disc}, there are some further conditions necessary to produce RM instabilities. They are both observed in the evolution of supernovae, and in smaller scale events such as the flow of magma \parencite{zhou_rayleightaylor_2021}.
+
+KHI instabilities appear between two layers of material moving at different velocities \parencite{zhou_rayleightaylor_2021}. Due to this motion, the interface between the two materials becomes unstable, creating instabilities \parencite{matsumoto_onset_2004}. These are also present in many situation, such as jets in the interstellar medium, or waves in the ocean. There is often also a density difference between the two layers, which creates further instabilities \parencite{matsumoto_onset_2004}.
+
+Both types of instabilities, KHI and RTI, are often observed together. The relative velocity of the two fluids moving in RT instabilities generates roll-ups which are due to KH instabilities \parencite{zhou_rayleightaylor_2021}. As mentioned above, KH instabilities often happen between two material of different densities, which also produce RT instabilities \parencite{matsumoto_onset_2004}.\\
+\linebreak
+
+The growth of these instabilities start linearly, and can be modelled with simple exponential expansions \parencite{zhou_rayleightaylor_2021}, however, past a certain point, the growth becomes non-linear and can only be modelled with numerical simulations. This non-linear stage happens in two parts, first a "weak" non-linearity during which the interface is still smooth, followed by a "strong" non-linearity during which a mushroom-like shape and KHI roll-ups form \parencite{zhou_rayleightaylor_2021,allen_rayleightaylor_1984}. As those instabilities are common in many fields, understanding them is important to understand many phenomena. And as they can not be modelled analytically past a certain point, numerical simulations are necessary for this.
+
+In this report, we will use a HLLE Riemann solver to model both Rayleigh-Taylor (\nameref{subsec:RTIandRMI}) and Kelvin-Helmholtz (\nameref{subsec:KHI}) instabilities, and attempt to model Richtmyer-Meshkov instabilities (\nameref{subsec:RTIandRMI}). 
+
 
 \section{Method}
 \label{sec:meth}
 \subsection{Hydrodynamics}
 \label{subsec:hydrodyn}
-To model the evolution of fluids, the first important points are the Euler equations and the equation of state of a system, which governs how the system evolve with time and space. Here, we assume an adiabatic equation of state : $P=K\rho^\gamma$, where gamma is the adiabatic index. There are three Euler equations, the continuity equation (eq. \ref{eq:cont}), which deals with the density displacement,
+To model the evolution of fluids in the absence of a magnetic field or viscosity, the first important points are the Euler equations and the equation of state of a system, which govern how the system evolve in time and space. Here, we assume an adiabatic equation of state : $P=K\rho^\gamma$, where gamma is the adiabatic index. The choice of an adiabatic or isothermal equation of state can be important for some instabilities in compressible fluids such as we have here, but the effect is negligeable for RTI and KHI instabilities \parencite{allen_rayleightaylor_1984}. There are three Euler equations, the continuity equation (eq. \ref{eq:cont}), which deals with the density displacement,
 \begin{equation}
   \label{eq:cont}
   \frac{\partial \rho}{\partial t} + \partial_i(\rho u_i) = 0,
 \end{equation}
 
-the momentum equation (eq. \ref{eq:mom}), which deals with the momentum displacement,
+the momentum equation (eq. \ref{eq:mom}), which deals with the momentum changes,
 \begin{equation}
   \label{eq:mom}
   \partial_t(\rho u_j) + \partial_i\rho u_iu_j + \delta_{ij}P = \rho g_j,
@@ -65,12 +77,12 @@ and finally, the energy equation (eq. \ref{eq:ene}), which as its name indicates
   \frac{\partial E}{\partial t} + \partial_i[(E+P)u_i] = 0.
 \end{equation}
 
-This set of equations can be written as only one, which makes its use in numerical simulations slightly easier. This is equation \ref{eq:comp},
+This set of equations can be written in a more compact form \parencite{oconnor_eulerian_2026}, which makes its use in numerical simulations slightly easier. This is equation \ref{eq:comp},
 \begin{equation}
   \label{eq:comp}
   \frac{\partial \mathbf{U}}{\partial t} + \frac{\partial \mathbf{F_i(U)}}{\partial x_i} = \mathbf{S(U)},
 \end{equation}
-in which \textbf{U} are the conserved variables, $\mathbf{U} = [\rho, \rho u_j, E]$, $\mathbf{F_i(U)}$ are the variables which go into the gradients, $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$, and \textbf{S} are the additional forces such as viscosity or gravity which could impact the fluid. Here, these are only the gravity, so $\mathbf{S(U)} = [0, \rho g_j, 0]$. 
+in which \textbf{U} are the conserved variables, $\mathbf{U} = [\rho, \rho u_j, E]$, $\mathbf{F_i(U)}$ are the variables which change in time or space, $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$, and \textbf{S} are the additional forces such as viscosity or gravity which could impact the fluid. Here, this is only the gravity in the RTI case, so $\mathbf{S(U)} = [0, \rho g_j, 0]$. 
 
 In addition to these equations, the sound speed (eq. \ref{eq:c_s}),
 \begin{equation}
@@ -78,7 +90,7 @@ In addition to these equations, the sound speed (eq. \ref{eq:c_s}),
   c_s = \gamma P/\rho,
 \end{equation}
 
-is needed to determine some of the movements. The pressure of the fluid is also derived from numerically evolved quantities (eq. \ref{eq:P}),
+is needed to determine the wave speed which modifies the fluxes, and the time-step. The pressure of the fluid is also derived from numerically evolved quantities (eq. \ref{eq:P}),
 \begin{equation}
   \label{eq:P}
   P = \rho\epsilon(\gamma-1).
@@ -90,7 +102,7 @@ Both the equations for the pressure and the sound speed originate from the equat
   E = \rho(u^2/2 + \epsilon + \phi).
 \end{equation}
 
-In this particular report, we model two instabilities, as described in the \nameref{sec:intro}. They have slightly different initial conditions to allow for the instabilities to develop. These instabilities are the Rayleigh-Taylor instability, which arrises when a denser fluid is pushed by gravity towards a less dense one, and the Kelvin-Helmholtz instability, which develops when two fluids move in contact with each others at different velocities. Thus, the RTI instability is modelled in a rectangular box with the y direction about three times as large as the x direction. The gravitational potential is $\phi = 0.1y$, such that the gravitational acceleration is $\vec{g} = -0.1\hat{y}$. Density is set up such that the "top" fluid (above y=0) is $\rho=2$, and the "bottom" fluid (bellow y=0) is $\rho=1$, then $P = P_0 - \phi \rho$, where $P_0$ is simply $P_0=2.5$. Finally, the adiabatic index is $\gamma = 7/5 = 1.4$, which corresponds to a diatomic gas. We add a small starting velocity in the y direction $v_y = 0.01\cdot[1 + \cos(4\pi x)]\cdot[1+\cos(3\pi y)]/4$ to perturbate the fluids initially. This is summarised in table \ref{tab:ini_condRTI}.
+In this particular report, we model two instabilities, as described in the \nameref{sec:intro}. They have slightly different initial conditions to allow for the instabilities to develop. The RTI instability is modelled in a rectangular box with the y direction about three times as large as the x direction. The gravitational potential is $\phi = 0.1y$, such that the gravitational acceleration is $\vec{g} = -0.1\hat{y}$, to maintain hydrodynamic equilibrium with the pressure mentioned bellow. Density is set up such that the "top" fluid (above y=0) is at $\rho=2$ in one simulation and $\rho=5$ in the other, and the "bottom" fluid (bellow y=0) is $\rho=1$ in one simulation and $\rho=0.5$ in the other. The difference in density between the two fluids can be expressed through the Atwood number. This is $\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}$, which give $A=0.3$ in the first simulation and $A=0.8$ in the second. $P = P_0 - \phi \rho$, where $P_0$ is simply $P_0=2.5$. Finally, the adiabatic index is $\gamma = 7/5 = 1.4$, which corresponds to a diatomic gas. We add a small starting velocity in the y direction $v_y = 0.1\cdot[1 + \cos(4\pi x)]\cdot[1+\cos(3\pi y)]/4$ to help perturbate the fluids. This is summarised in table \ref{tab:ini_condRTI}. The initial conditions attempted for RMI are similar, but the gravitational force is dampened to -0.01, and the initial velocity is set as $v_y = 0.5\cdot \max(c_s)$ at $\min(y)$ and 0 everywhere else.
 
 \begin{table}[t!]
   \centering
@@ -101,8 +113,8 @@ In this particular report, we model two instabilities, as described in the \name
     Gravitational potential & $\phi = 0.1y$\\
     Gravitational acceleration & $g = -0.1\hat{y}$\\
     \hline
-    Density & $\rho = \begin{cases}\rho = 2 & \textrm{if y $>$ 0},\\
-      \rho = 1 & \textrm{if y $<$ 0}.
+    Density & $\rho = \begin{cases}\rho = 5, 2 & \textrm{if y $>$ 0},\\
+      \rho = 0.5,1 & \textrm{if y $<$ 0}.
     \end{cases}$\\
     Pressure & $P = P_0 - \phi\rho$, $P_0 = 2.5$\\
     Adiabatic index & $\gamma = 7/5 = 1.4$\\
@@ -117,7 +129,7 @@ In this particular report, we model two instabilities, as described in the \name
   \label{tab:ini_condRTI}
 \end{table}
 
-The KHI is modelled in a square box, with no gravitational potential nor acceleration. The adiabatic index is $\gamma = 5/3$, which corresponds to a monoatomic gas, and the pressure constant everywhere at $P=2.5$. Both the density (eq. \ref{eq:density}),
+The KHI is modelled in a square box, with no gravitational potential nor acceleration. This is important in part because KH instabilities are dampened or even stabilised by gravitational acceleration \parencite{zhou_rayleightaylor_2021}. The adiabatic index is $\gamma = 5/3$, which corresponds to a monoatomic gas, and the pressure constant everywhere at $P=2.5$. Both the density (eq. \ref{eq:density}),
 \begin{equation}
   \label{eq:density}
   \rho(x, y) = \begin{cases}
@@ -144,7 +156,7 @@ where $U_1 =0.5$, $U_2=-0.5$, $U_m=(U_1 - U_2)/2$ and $L = 0.025$,
   \label{eq:velocity2}
   v_y(x,y) = 0.01sin(4\pi x),
 \end{equation}
-have much more complex initialisation than for the RTI simulation. These parameters are summarised in table \ref{tab:ini_condKHI}.
+have much more complex initialisation than for the RTI simulation. These parameters are summarised in table \ref{tab:ini_condKHI}. At high resolution, the combination of density and velocity disparity between the two fluids should produce RT instabilities within the KH vortrices \parencite{matsumoto_onset_2004}.
 
 \begin{table}[t!]
   \centering
@@ -178,9 +190,11 @@ have much more complex initialisation than for the RTI simulation. These paramet
   \label{tab:ini_condKHI}
 \end{table}
 
+All the initial conditions used for this paper are taken from \cite{oconnor_eulerian_2026}, except those for the RM instabilities.
+
 \subsection{Numerical methods}
 \label{subsec:nummeth}
-The first step for the simulations is to find the primitive variables, $\rho$, $u_j$, P, $\epsilon$ and $\phi$ at the boundaries. This is done by calculating two slopes for each cells : $(\rho_{m+1} - \rho_m)/\Delta x$ and $(\rho_m - \rho_{m-1})/\Delta x$. If they both have the same sign, then the slope closest to 0 is used. If they differ, then piecewise reconstruction is used, simply using $(\rho_{m+1} - \rho{m-1})/2\Delta x$ as a slope. The resulting variable at the boundary is the variable in the center of the cell plus 0.5 times the slope. The pressure and the sound speed can be found from the other variables, along with the total energy, and $\phi$ does not change from one time step to the next. Using these variables, we can calculate the fluxes through each boundaries for each cell. These fluxes, $\mathbf{F(U)}$ in the compact form of the Euler equation, are $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$. Because of the way the variables at the boundary are found, there can be a discrepancy between the values at a same boundary for different cells. We use the HLLE approximation (eq. \ref{eq:HLLE}) to solve this problem, called the Riemann problem. 
+During the simulation and after initialisation, the first step is to find the primitive variables, $\rho$, $u_j$, P, $\epsilon$ and $\phi$ at the boundaries between the cells. This is done using the minmod method, by calculating two slopes for each cells : $(\rho_{m+1} - \rho_m)/\Delta x$ and $(\rho_m - \rho_{m-1})/\Delta x$. If they both have the same sign, then the slope closest to 0 is used. If they differ, then the slope is set to 0, such that the variable at the boundary is equal to the variable within the cell. The resulting variable at the boundary is the variable in the cell plus 0.5 times the slope. The density, velocity and internal energy are found this way, while the pressure and the sound speed are found from these variables, along with the total energy, and $\phi$ does not change from one time step to the next. Using these variables, we can calculate the fluxes through each boundaries for each cell. These fluxes, $\mathbf{F(U)}$ in the compact form of the Euler equation, are $\mathbf{F_i(U)} = [\rho u_i, \rho u_i u_j + \delta_{ij}P, (E+P)u_i]$. Because of the way the variables at the boundary are found, there can be a discrepancy between the values at a same boundary for different cells. We use the HLLE approximation (eq. \ref{eq:HLLE}) to solve this problem, called the Riemann problem. 
 \begin{equation}
   \label{eq:HLLE}
   [\mathbf{F_x(U)}]^{(n)}_{m+1/2} = \frac{\lambda_R\mathbf{F_x(U)}(p^{L,n}_{m+1/2}) - \lambda_L\mathbf{F_x(U)}(p^{R, n}_{m+1/2}) + \lambda_R\lambda_L(\mathbf{U}(p^{R,n}_{m+1/2}) - \mathbf{U}(p^{L,n}_{m+1/2}))}{\lambda_R - \lambda_L}
@@ -196,17 +210,89 @@ Finally, the updated conserved variables $\mathbf{U}$ can be found from these fl
 
 Finally, we also use a dynamical timestep wich depends mainly on the velocity and sound speed within the cells : $\Delta t = C \frac{\min(\Delta x, \Delta y)}{\max(|u + c_s)}\cdot D$, with D the number of dimensions. 
 
-The accuracy of the evolution in time is also improved by using Runge-Kutta method. The variables are first found for half a time step, before being reinserted into the program to find the fluxes at the full time step from them. The actual variables are found from these fluxes.
-
+The accuracy of the evolution in time is also improved by using a very basic second order Runge-Kutta method. The variables are first found for half a time step, before being reinserted into the program to find the fluxes at the full time step from them. The actual variables are found from the fluxes obtained from the half-step variable.
 
 \section{Results}
 \label{sec:res}
 
+\subsection{Rayleigh-Taylor and Richtmyer-Meshkov Instabilities}
+\label{subsec:RTIandRMI}
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step0.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step2000.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step4400.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step14000.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step17200.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step22000.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI1/step28400.pdf}
+  \includegraphics[trim={0 0 0 6.3cm}, clip, width=0.45\textwidth]{images/RTI1/step28400.pdf}
+  \caption{Density within the Rayleigh-Taylor instability simulation with an Atwood number of 0.33 at seven points in time.}
+  \label{fig:RTI1}
+\end{figure}
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step0.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step3200.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step4400.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step6000.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step8000.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step10400.pdf}
+  \includegraphics[trim={0 0 0 8cm}, clip, width=0.5\textwidth]{images/KHI/step0.pdf}
+  \caption{Density within the Rayleigh-Taylor instability simulation with an Atwood number of 0.8 at six points in time.}
+  \label{fig:RTI2}
+\end{figure}
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RM/step0.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RM/step1200.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RM/step13600.pdf}
+  \includegraphics[trim={0 0 0 6.3cm}, clip, width=0.45\textwidth]{images/RM/step13600.pdf}
+  \caption{Density within the Richtmyer-Meshkov instability simulation at three points in time.}
+  \label{fig:RMI}
+\end{figure}
+
+\subsection{Kelvin-Helmholtz Instabilities}
+\label{subsec:KHI}
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step0.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step3200.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step4400.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step6000.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step8000.pdf}
+  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step10400.pdf}
+  \includegraphics[trim={0 0 0 8cm}, clip, width=0.5\textwidth]{images/KHI/step0.pdf}
+  \caption{Density within the Kelvin-Helmholtz instability simulation at six points in time.}
+  \label{fig:KHI}
+\end{figure}
+
 \section{Discussion}
 \label{sec:disc}
+While the model itself is working and produces basic simulations of various instabilities, there are still some points which could be improved upon.
+First, the resolution of the model is extremely important for the instabilities to develop correctly. As can be seen in the top panel of figure \ref{fig:RTInonres}, if the resolution is not high enough, the rolls characteristic of KHI instabilities smear instead of developing carrectly. If the cells are too large, the sharp interfaces are diffused across multiple cells, and the perturbation is lost within the width of the interface. The bottom panel of figure \ref{fig:RTInonres} shows a time ulterior to those shown in \nameref{subsec:RTIandRMI} in the simulation where A=0.3. We can see that instead of the characteristic mushroom shape and multiple roll-ups there should be at this time, the interfaces are no longer sharp and the fluids mixes.
+
+\begin{figure}[t!]
+  \centering
+    \includegraphics[width=1\textwidth]{images/underresKHI.pdf}
+    \includegraphics[width=1\textwidth]{images/underresRTI.pdf}
+    \caption{Top: Kelvin-Helmholtz instability after nearly 5s, with a 256 by 256 resolution. Bottom: Rayleigh-Taylor instability after nearly 10s, with a 100 by 300 resolution. The structures which should form smeared into much more diffuse elements.}
+    \label{fig:RTInonres}
+\end{figure}
+
+Second, the implementation of the Richtmyer-Meshkov instability did not go as planned. The instability should resemble Rayleigh-Taylor instability, but presented instead as the interface becoming more diffuse. This is probably not due to a mistake within the model itself but in the initialisation. The velocity of the shock-wave might not have been sufficient, and the material it crossed before reaching the interface probably slowed it too much to have an effect. In conjonction with this, the resolution had to be lowered due to computational cost. As mentioned above, small initial perturbation could have been lost within the size of the cells.
+
+Finally, while both RTI and KHT implementations worked very well for their resolution, showing the characteristics expected for these instabilities and initial parameters, some elements could be added in further implementations. In particular, magnetic fields play an important roles in many phenomena which involve these instabilities, such as in Earth's ionosphere for RT instabilities \parencite{zhou_rayleightaylor_2021}, and the Earth's magnetosphere for KH instabilities \parencite{matsumoto_onset_2004}. It would not be extremely complex to add a term representing the Lorentz force to the Euler equations to account for magneto-hydrodynamics. Magnetic fields perpendicular to the flow are expected not to have an impact on the instabilities, while those parallel to the flow should dampen them \parencite{trussoni_kelvinhelmholtz_2008}.
+
+The scale of the simulations could also be an interesting parameter to modify. At smaller scale and better resolution, it would be possible to observe further development within the instabilities, although higher order solutions might be needed. At larger scales, it would be possible to observe multiple perturbations developing at the same time, as is often the case in real-world phenomena. 
 
 \section{Conclusion}
 \label{sec:conc}
+This report produced a basic working model for numerical simulations of a few instabilities, and showed its results for both Rayleigh-Taylor and Kelvin-Helmholtz instabilities. While Richtmyer-Meshkov instabilities did not develop as expected, this seems to be linked to initial conditions more than the model itself. The resolution of the simulations seem to have a large impact on the results, lower resolutions having a tendency to diffuse interfaces which should remain sharp. The model could also easily be developed further by adding effects such as magnetic fields, which are important in many real-world instances of these instabilities.
 
 \printbibliography
 \end{document}

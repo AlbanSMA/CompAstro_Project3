@@ -24,8 +24,8 @@ def initialisation(n_dim, xdim, ydim, xcells, ycells, P0, adiab_ind):
     mask2 = (pos[1,:,:] > 0)
 
     rho = np.zeros((xcells, ycells))
-    rho[mask1] = 1
-    rho[mask2] = 2
+    rho[mask1] = 0.5
+    rho[mask2] = 5
 
     # Pressure
     P = P0 - phi*rho
