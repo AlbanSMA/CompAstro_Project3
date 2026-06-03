@@ -7,7 +7,7 @@ from plot import *
 from update import *
 
 #Create paths
-path = ""
+path = ""       #path to the folder to store the plots
 imagepath = path+folder
 files = os.listdir(path)
 for i in files:
