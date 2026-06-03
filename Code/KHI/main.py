@@ -7,7 +7,7 @@ from plot import *
 from update import *
 
 #Create paths
-path = "C:\\Users\\User\\Documents\\Documents\\University\\Master_SU\\Year_1\\IIB\\CompAstro\\Projects\\Project3\\Plots\\"
+path = ""
 imagepath = path+folder
 files = os.listdir(path)
 for i in files:

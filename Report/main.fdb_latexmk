@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1780441860.09254 "main.bcf" "main.bbl" "main" 1780442431.50613 0
-  "main.bcf" 1780442430 135665 102eaa88b8e76975c827e194d618ae8a "pdflatex"
+["biber main"] 1780446572.88182 "main.bcf" "main.bbl" "main" 1780447575.68161 0
+  "main.bcf" 1780447575 135902 8150f2b2629e7a04c135aff307260636 "pdflatex"
   "ref.bib" 1780437154 3434 79adc8a24bbac873048f2f9b086c0d2d ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1780442425.90879 "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" "main.pdf" "main" 1780442431.5094 0
+["pdflatex"] 1780447570.70032 "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" "main.pdf" "main" 1780447575.68425 0
   "C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1777374769 84158 d77284a6843bde1e4b9764f09fb2e89e ""
   "C:/Users/User/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1776771118 13349829 4a36b8ce873eea7331d01262fddc519c ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -36,6 +36,7 @@
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1247596666 35469 dcf3a5f2fc1862f5952e3ee5eb1d98c4 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1247596667 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
@@ -111,7 +112,7 @@
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1761901070 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
-  "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" 1780442423 23478 c8a0ec382e27dbe5dac17bb752c3042e ""
+  "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" 1780447547 26343 da3b57e1be13732fca118e9a2d35ffda ""
   "images/KHI/step0.pdf" 1780395368 14954 ba805135b1baf8ca7b5713a4014ce8cd ""
   "images/KHI/step10400.pdf" 1780406073 265580 ab3fad3e40374263e013ae8671954eaa ""
   "images/KHI/step3200.pdf" 1780399055 104750 051ad05f80981ba1e5bb092271dc5998 ""
@@ -130,11 +131,11 @@
   "images/RTI1/step4400.pdf" 1780389203 29075 21a333192dc76dc8c7130d6485918788 ""
   "images/underresKHI.pdf" 1780358748 57981 8c06e116887234758e98c931eb31104e ""
   "images/underresRTI.pdf" 1780390495 34809 82e39036e29a2a09817dcb3c8cf646ee ""
-  "main.aux" 1780442430 10692 5c999fedbfe9b843aa5b06a5c1e3d17a "pdflatex"
-  "main.bbl" 1780441867 27303 da9df85e818b72eebb933a3112c8134f "biber main"
-  "main.out" 1780442430 1238 f8ea6232b11a4a5b389c3a11ff6d859f "pdflatex"
-  "main.run.xml" 1780442430 2420 037752900427d53470ab58bfebae51be "pdflatex"
-  "main.tex" 1780442423 23478 c8a0ec382e27dbe5dac17bb752c3042e ""
+  "main.aux" 1780447574 11091 803d82c851e9289dfb918cdda43add4a "pdflatex"
+  "main.bbl" 1780446580 27303 da9df85e818b72eebb933a3112c8134f "biber main"
+  "main.out" 1780447574 857 88f5bf10599a5bd1dcb45c66a890c5d3 "pdflatex"
+  "main.run.xml" 1780447575 2420 037752900427d53470ab58bfebae51be "pdflatex"
+  "main.tex" 1780447547 26343 da3b57e1be13732fca118e9a2d35ffda ""
   (generated)
   "main.aux"
   "main.bcf"

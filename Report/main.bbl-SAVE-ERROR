@@ -19,6 +19,140 @@
 
 \refsection{0}
   \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{allen_rayleightaylor_1984}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f423c9b5b5ee8bbc14c1376a281dd056}{%
+           family={Allen},
+           familyi={A\bibinitperiod},
+           given={A.\bibnamedelimi J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=52daef07d2f21c539f54a4913c811d6c}{%
+           family={Hughes},
+           familyi={H\bibinitperiod},
+           given={P.\bibnamedelimi A.},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{fullhash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{fullhashraw}{39361e7f3f04cd22821aede8165f0291}
+      \strng{bibnamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorbibnamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authornamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorfullhash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorfullhashraw}{39361e7f3f04cd22821aede8165f0291}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0035-8711}
+      \field{journaltitle}{Monthly Notices of the Royal Astronomical Society}
+      \field{number}{3}
+      \field{title}{The {Rayleigh}–{Taylor} instability in astrophysical fluids}
+      \field{urlday}{2}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{208}
+      \field{year}{1984}
+      \field{urldateera}{ce}
+      \field{pages}{609\bibrangedash 621}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1093/mnras/208.3.609
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/mnras/208.3.609
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/mnras/208.3.609
+      \endverb
+    \endentry
+    \entry{matsumoto_onset_2004}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f489825c59fda931792d848a25fb6803}{%
+           family={Matsumoto},
+           familyi={M\bibinitperiod},
+           given={Yosuke},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=392f8111e920f228e49e350194e9bb42}{%
+           family={Hoshino},
+           familyi={H\bibinitperiod},
+           given={Masahiro},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{fullhash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{fullhashraw}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{bibnamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorbibnamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authornamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorfullhash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorfullhashraw}{596426e03e76a888fb7787c8fb26c6ca}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1944-8007}
+      \field{journaltitle}{Geophysical Research Letters}
+      \field{note}{\_eprint: https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2003GL018195}
+      \field{number}{2}
+      \field{title}{Onset of turbulence induced by a {Kelvin}-{Helmholtz} vortex}
+      \field{urlday}{2}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{31}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1029/2003GL018195
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1029/2003GL018195
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1029/2003GL018195
+      \endverb
+    \endentry
+    \entry{oconnor_eulerian_2026}{unpublished}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=706feb361154773f273f13eb66b35156}{%
+           family={O'Connor},
+           familyi={O\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{706feb361154773f273f13eb66b35156}
+      \strng{fullhash}{706feb361154773f273f13eb66b35156}
+      \strng{fullhashraw}{706feb361154773f273f13eb66b35156}
+      \strng{bibnamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authorbibnamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authornamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authorfullhash}{706feb361154773f273f13eb66b35156}
+      \strng{authorfullhashraw}{706feb361154773f273f13eb66b35156}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unpublished}
+      \field{title}{Eulerian {Hydrodynamics}}
+      \field{year}{2026}
+    \endentry
     \entry{trussoni_kelvinhelmholtz_2008}{inbook}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=86e832d0e1a46bc92a8d43ed84cc4903}{%
@@ -214,6 +348,140 @@
     \endentry
   \enddatalist
   \datalist[entry]{apa/global//global/global/global}
+    \entry{allen_rayleightaylor_1984}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f423c9b5b5ee8bbc14c1376a281dd056}{%
+           family={Allen},
+           familyi={A\bibinitperiod},
+           given={A.\bibnamedelimi J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=52daef07d2f21c539f54a4913c811d6c}{%
+           family={Hughes},
+           familyi={H\bibinitperiod},
+           given={P.\bibnamedelimi A.},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{fullhash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{fullhashraw}{39361e7f3f04cd22821aede8165f0291}
+      \strng{bibnamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorbibnamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authornamehash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorfullhash}{39361e7f3f04cd22821aede8165f0291}
+      \strng{authorfullhashraw}{39361e7f3f04cd22821aede8165f0291}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0035-8711}
+      \field{journaltitle}{Monthly Notices of the Royal Astronomical Society}
+      \field{number}{3}
+      \field{title}{The {Rayleigh}–{Taylor} instability in astrophysical fluids}
+      \field{urlday}{2}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{208}
+      \field{year}{1984}
+      \field{urldateera}{ce}
+      \field{pages}{609\bibrangedash 621}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1093/mnras/208.3.609
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/mnras/208.3.609
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/mnras/208.3.609
+      \endverb
+    \endentry
+    \entry{matsumoto_onset_2004}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f489825c59fda931792d848a25fb6803}{%
+           family={Matsumoto},
+           familyi={M\bibinitperiod},
+           given={Yosuke},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=392f8111e920f228e49e350194e9bb42}{%
+           family={Hoshino},
+           familyi={H\bibinitperiod},
+           given={Masahiro},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{fullhash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{fullhashraw}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{bibnamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorbibnamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authornamehash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorfullhash}{596426e03e76a888fb7787c8fb26c6ca}
+      \strng{authorfullhashraw}{596426e03e76a888fb7787c8fb26c6ca}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1944-8007}
+      \field{journaltitle}{Geophysical Research Letters}
+      \field{note}{\_eprint: https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2003GL018195}
+      \field{number}{2}
+      \field{title}{Onset of turbulence induced by a {Kelvin}-{Helmholtz} vortex}
+      \field{urlday}{2}
+      \field{urlmonth}{6}
+      \field{urlyear}{2026}
+      \field{volume}{31}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1029/2003GL018195
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1029/2003GL018195
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1029/2003GL018195
+      \endverb
+    \endentry
+    \entry{oconnor_eulerian_2026}{unpublished}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=706feb361154773f273f13eb66b35156}{%
+           family={O'Connor},
+           familyi={O\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{706feb361154773f273f13eb66b35156}
+      \strng{fullhash}{706feb361154773f273f13eb66b35156}
+      \strng{fullhashraw}{706feb361154773f273f13eb66b35156}
+      \strng{bibnamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authorbibnamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authornamehash}{706feb361154773f273f13eb66b35156}
+      \strng{authorfullhash}{706feb361154773f273f13eb66b35156}
+      \strng{authorfullhashraw}{706feb361154773f273f13eb66b35156}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unpublished}
+      \field{title}{Eulerian {Hydrodynamics}}
+      \field{year}{2026}
+    \endentry
     \entry{trussoni_kelvinhelmholtz_2008}{inbook}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=86e832d0e1a46bc92a8d43ed84cc4903}{%
