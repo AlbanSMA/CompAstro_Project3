@@ -42,16 +42,16 @@
 \label{sec:intro}
 Instabilities shape a large part of the Universe. They influence the evolution of gas clouds into galaxies, stars and planets, along with the evolution of more impulsive events such as supernovae or jets \parencite{zhou_rayleightaylor_2021}. On smaller scales, the same instabilities influence Earth, such as waves in the oceans and effects in the magnetosphere and ionosphere. While most of them can be sorted into a few conceptually simple classes, the fluid dynamics they create are not as straightforward.
 
-\citeauthor{trussoni_kelvinhelmholtz_2008} (\citedatelink{trussoni_kelvinhelmholtz_2008}) defines an instability as a system's reaction to an external perturbation which definitely modifies its structure through an energy transfer. This is the case for both Kelvin-Helmholtz (KHI) and Rayleigh-Taylor instabilities (RTI). In the case of RTI, a denser fluid and a less dense fluid share an interface. The external element which introduces the perturbation are gravitational forces, which push the denser fluid towards the less dense fluid. It caves the interface towards the denser fluid in some parts and the less dense fluid in others, forming a characteristic mushroom shape \parencite{zhou_rayleightaylor_2021}. If the discrepancy in densities is high enough, then the lower density fluid forms bubbles in the higher density fluid instead \parencite{zhou_rayleightaylor_2021}. Richtmyer-Meshkov instabilities (RMI) are seen as a particular case of Rayleigh-Taylor instabilities, in which the perturbations start due to a shock-wave instead of a constant or mostly constant gravitational force. Because of this, RTI are only unstable if the gravitational force is in the right direction, placing the denser fluid ``above", while RMI are always unstable independently of the direction of the shock-wave \parencite{zhou_rayleightaylor_2021}. As we will see in \nameref{sec:disc}, there are some further conditions necessary to produce RM instabilities. They are both observed in the evolution of supernovae, and in smaller scale events such as the flow of magma \parencite{zhou_rayleightaylor_2021}.
+\citeauthor{trussoni_kelvinhelmholtz_2008} (\citedatelink{trussoni_kelvinhelmholtz_2008}) defines an instability as a system's reaction to an external perturbation which definitely modifies its structure through an energy transfer. This is the case for both Kelvin-Helmholtz (KHI) and Rayleigh-Taylor instabilities (RTI). In the case of RTI, a denser fluid and a less dense fluid share an interface. The external element which introduces the perturbation are gravitational forces, which push the denser fluid towards the less dense fluid. It caves the interface towards the denser fluid in some parts and the less dense fluid in others, forming a characteristic mushroom shape \parencite{zhou_rayleightaylor_2021}. If the discrepancy in densities is high enough, then the lower density fluid forms bubbles in the higher density fluid instead \parencite{zhou_rayleightaylor_2021}. Richtmyer-Meshkov instabilities (RMI) are seen as a particular case of Rayleigh-Taylor instabilities, in which the perturbations start due to a shock-wave instead of a constant or mostly constant gravitational force. Because of this, the system is only unstable to RTI if the gravitational force is in the right direction, placing the denser fluid ``above", while the system is always unstable to RMI regardless of the direction of the shock-wave \parencite{zhou_rayleightaylor_2021}. As we will see in the \nameref{sec:disc}, there seem to be some additional conditions necessary to produce RM instabilities. They are both observed in the evolution of supernovae, and in smaller scale events such as the flow of magma \parencite{zhou_rayleightaylor_2021}.
 
-KHI instabilities appear between two layers of material moving at different velocities \parencite{zhou_rayleightaylor_2021}. Due to this motion, the interface between the two materials becomes unstable, creating instabilities \parencite{matsumoto_onset_2004}. These are also present in many phenomena, such as jets in the interstellar medium, or waves in the ocean. There often is a density difference between the two layers, which creates further instabilities \parencite{matsumoto_onset_2004}.
+KHI instabilities appear between two layers of material moving at different velocities \parencite{zhou_rayleightaylor_2021}. Due to this motion, the interface between the two materials is unstable, creating instabilities \parencite{matsumoto_onset_2004}. These are also present in many phenomena, such as jets in the interstellar medium, or waves in the ocean. There often is a density difference between the two layers, which creates further instabilities \parencite{matsumoto_onset_2004}.
 
 Both types of instabilities, KHI and RTI, are often observed together. The relative velocity of the two fluids moving in RT instabilities generates roll-ups which are due to KH instabilities \parencite{zhou_rayleightaylor_2021}. As mentioned above, KH instabilities often happen between two material of different densities, which also produce RT instabilities \parencite{matsumoto_onset_2004}.\\
 \linebreak
 
 The growth of these instabilities start linearly, and can be modelled with simple exponential expansions \parencite{zhou_rayleightaylor_2021}, however, past a certain point, the growth becomes non-linear and can only be modelled with numerical simulations. This non-linear stage happens in two parts, first a ``weak" non-linearity during which the interface is still smooth, followed by a ``strong" non-linearity during which the characteristic shapes of the different instabilities form \parencite{zhou_rayleightaylor_2021,allen_rayleightaylor_1984}. As those instabilities are common in many fields, understanding them is important to understand many phenomena. And as they can not be modelled analytically past a certain point, numerical simulations are necessary for this.
 
-In this report, we will use a HLLE Riemann solver to model both Rayleigh-Taylor (\nameref{subsec:RTIandRMI}) and Kelvin-Helmholtz (\nameref{subsec:KHI}) instabilities, and attempt to model Richtmyer-Meshkov instabilities (\nameref{subsec:RTIandRMI}). 
+In this report, we will use a HLLE Riemann solver to model both Rayleigh-Taylor and Kelvin-Helmholtz instabilities in 2D, and attempt to model Richtmyer-Meshkov instabilities. 
 
 
 \section{Method}
@@ -214,7 +214,9 @@ Finally, the updated conserved variables $\mathbf{U}$ can be found from these fl
   U^{(n+1)}_m = [-(\frac{[\mathbf{F_x(U)}]^{(n)}_{m+1/2} - [\mathbf{F_x(U)}]^{(n)}_{m-1/2}}{\Delta x} + \frac{[\mathbf{F_y(U)}]^{(n)}_{m+1/2} - [\mathbf{F_y(U)}]^{(n)}_{m-1/2}}{\Delta y}) + \mathbf{S(U_m^{(n)})}] \cdot \Delta t + U_m^{(n)}.
 \end{equation}
 
-\noindent We also use a dynamical timestep wich depends mainly on the velocity and sound speed within the cells and the resolution: $\Delta t = C \frac{\min(\Delta x, \Delta y)}{\max(|u + c_s)}\cdot D$, with D the number of dimensions and $C=0.25$. The accuracy of the evolution in time is also improved by using a very basic second order Runge-Kutta method. The variables are first found after half a time step, before being reinserted into the program to find the fluxes at the full time step from them. The variables after a full time step are found by updating the variables from the previous step using the fluxes from this half-step.
+\noindent We also use a dynamical timestep wich depends mainly on the velocity and sound speed within the cells and the resolution: $\Delta t = C \frac{\min(\Delta x, \Delta y)}{\max(|u + c_s)}\cdot D$, with D the number of dimensions and $C=0.25$. The accuracy of the evolution in time is improved by using a very basic second order Runge-Kutta method. The variables are first found after half a time step, before being reinserted into the program to find the fluxes at the full time step from them. The variables after a full time step are found by updating the variables from the previous step using the fluxes from this half-step.
+
+Finally, the boundaries of the system are handled in the same way for all simulations, as periodic in x and reflective in y, using one row of ghost cells.
 
 \section{Results}
 \label{sec:res}
@@ -237,18 +239,19 @@ First the results from the RT instability simulations. In figure \ref{fig:RTI1},
 
 \begin{figure}[t]
   \centering
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step0.pdf}
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step3200.pdf}
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step4400.pdf}
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step6000.pdf}
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step8000.pdf}
-  \includegraphics[trim={1.8cm 1.6cm 2.7cm 0}, clip, width=0.3\textwidth]{images/KHI/step10400.pdf}
-  \includegraphics[trim={0 0 0 8cm}, clip, width=0.5\textwidth]{images/KHI/step0.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step0.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step3600.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step13600.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step20000 copy.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step27200.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step31200.pdf}
+  \includegraphics[trim={0 1.6cm 0.7cm 0}, clip, width=0.45\textwidth]{images/RTI2/step36800.pdf}
+  \includegraphics[trim={0 0 0 6.3cm}, clip, width=0.45\textwidth]{images/RTI2/step36800.pdf}
   \caption{Density within the Rayleigh-Taylor instability simulation with an Atwood number of 0.8 at six points in time.}
   \label{fig:RTI2}
 \end{figure}
 
-In figure \ref{fig:RTI2}, we can see the development of a RT instability across about !!!change this!!!, with an Atwood number $A=0.8$. As one of the fluids is significantly denser than the other, it is expected that the less dense one should expand in bubble-like shapes toward the denser. This also fit with what we can observe in the snapshots, although the bubbles seem to grow with much sharper angles than is expected from most natural phenomena.
+In figure \ref{fig:RTI2}, we can see the development of a RT instability across about 5.5 seconds, with an Atwood number $A=0.8$. As one of the fluids is significantly denser than the other, it is expected that the less dense one should expand in bubble-like shapes toward the denser \parencite{zhou_rayleightaylor_2021}. This also fit with what we can observe in the snapshots, although the bubbles seem to grow with much sharper angles than is expected from most natural phenomena.
 
 \begin{figure}[t]
   \centering
@@ -260,7 +263,7 @@ In figure \ref{fig:RTI2}, we can see the development of a RT instability across 
   \label{fig:RMI}
 \end{figure}
 
-Finally, figure \ref{fig:RMI} shows snapshots of the simulation of the RM instability with $A=0.3$. This instability should develop similarly to an RT instability, possibly at a different rate. That is not what we can observe here. It seems that the interface is instead diffusing into a larger, smoother zone.
+Finally, figure \ref{fig:RMI} shows snapshots of the simulation of the RM instability with $A=0.3$. This instability should develop similarly to an RT instability, possibly at a different rate \parencite{zhou_rayleightaylor_2021}. That is not what we can observe here. It seems that the interface is instead diffusing into a larger, smoother zone.
 
 \begin{figure}[t]
   \centering
@@ -275,24 +278,24 @@ Finally, figure \ref{fig:RMI} shows snapshots of the simulation of the RM instab
   \label{fig:KHI}
 \end{figure}
 
-Then those from the KH ones. Figure \ref{fig:KHI} show six snapshots from the simulation of the KH instability. The layers moving relative to each others should produce waves which keep rolling onto themselves, which is exactly what we can see here. 
+The results from the KH instability simulation is shown in figure \ref{fig:KHI} show six snapshots from the simulation of the KH instability. The layers moving relative to each others should produce waves which keep rolling onto themselves before flattening slightly, which is exactly what we can see here. 
 
 \section{Discussion}
 \label{sec:disc}
 While the model itself is working and produces basic simulations of various instabilities, there are still some points which could be improved upon.
-First, the resolution of the model is extremely important for the instabilities to develop correctly. As can be seen in the top panel of figure \ref{fig:RTInonres}, if the resolution is not high enough, the rolls characteristic of KH instabilities smear instead of developing correctly. If the cells are too large, the sharp interfaces are diffused across multiple cells, and the perturbation is lost within the width of the interface. The bottom panel of figure \ref{fig:RTInonres} shows a time ulterior to those shown in \nameref{sec:res} for the RT instability simulation where A=0.3. We can see that instead of the characteristic mushroom shape and multiple roll-ups there should be at this time, the interfaces are no longer sharp and the fluids mix. The sharper angles than expected in figure \ref{fig:RTI2} could also be due to this resolution problem. The KH instability simulation which is at a much higher resolution develops exactly as expected. It is probable that given the time and the computational power, a higher resolution simulation of both RT instability simulations would produce similar results.
+First, the resolution of the model is extremely important for the instabilities to develop correctly. As can be seen in the top panel of figure \ref{fig:RTInonres}, if the resolution is not high enough, the rolls characteristic of KH instabilities smear instead of staying sharp. If the cells are too large, the sharp interfaces are diffused across multiple cells, and the perturbation is lost within the width of the interface. The bottom panel of figure \ref{fig:RTInonres} shows a time ulterior to those shown in \nameref{sec:res} for the RT instability simulation where A=0.3. We can see that instead of the characteristic mushroom shape and multiple roll-ups there should be at this time, the interfaces are no longer sharp and the fluids mix. The sharper angles than expected in figure \ref{fig:RTI2} could also be due to this resolution problem. The KH instability simulation which is at a much higher resolution develops exactly as expected. It is probable that given the time and the computational power, a higher resolution simulation of both RT instability simulations would produce similar results.
 
-\begin{figure}[t]
+\begin{figure}[t!]
   \centering
     \includegraphics[width=1\textwidth]{images/underresKHI.pdf}
     \includegraphics[width=1\textwidth]{images/underresRTI.pdf}
-    \caption{Top: Kelvin-Helmholtz instability after nearly 5s, with a 256 by 256 resolution. Bottom: Rayleigh-Taylor instability after nearly 10s, with a 100 by 300 resolution. The structures which should form smeared into much more diffuse elements.}
+    \caption{Top: Kelvin-Helmholtz instability after nearly 5s, with a 256 by 256 resolution. Bottom: Rayleigh-Taylor instability after nearly 15s, with a 100 by 300 resolution. The structures which should form smeared into much more diffuse elements.}
     \label{fig:RTInonres}
 \end{figure}
 
-Second, the implementation of the Richtmyer-Meshkov instability did not go as planned. The instability should resemble Rayleigh-Taylor instability, but presented instead as the interface becoming more diffuse. This is probably not due to a mistake within the model itself but in the initialisation. The velocity of the shock-wave might not have been sufficient, and the material it crossed before reaching the interface probably slowed it too much to have an effect. In conjonction with this, the resolution had to be lowered due to computational cost. As mentioned above, small initial perturbation could have been lost within the size of the cells.
+Second, the implementation of the Richtmyer-Meshkov instability did not go as planned. The instability should resemble Rayleigh-Taylor instabilities \parencite{zhou_rayleightaylor_2021}, but presented instead as the interface becoming more diffuse. This is probably not due to a mistake within the model itself but in the initialisation. The velocity of the shock-wave might not have been sufficient, and the material it crossed before reaching the interface probably slowed it too much to have an effect. In conjonction with this, the resolution had to be lowered due to computational cost. As mentioned above, small initial perturbations could have been lost within the size of the cells and prevented from growing.
 
-Finally, while both RTI and KHT implementations worked very well for their resolution, showing the characteristics expected for these instabilities and initial parameters, some elements could be added in further implementations. In particular, magnetic fields play an important roles in many phenomena which involve these instabilities, such as in Earth's ionosphere for RT instabilities \parencite{zhou_rayleightaylor_2021}, and the Earth's magnetosphere for KH instabilities \parencite{matsumoto_onset_2004}. It would not be extremely complex to add a term representing Lorentz force to the Euler equations to account for magneto-hydrodynamics. Magnetic fields perpendicular to the flow are expected not to have an impact on the instabilities, while those parallel to the flow should dampen them \parencite{trussoni_kelvinhelmholtz_2008}.
+Finally, while both RTI and KHI implementations worked very well for their resolution, showing the characteristics expected for these instabilities and initial parameters, some elements could be added in further implementations. In particular, magnetic fields play an important roles in many phenomena which involve these instabilities, such as in Earth's ionosphere for RT instabilities \parencite{zhou_rayleightaylor_2021}, and the Earth's magnetosphere for KH instabilities \parencite{matsumoto_onset_2004}. It would not be extremely complex to add a term representing Lorentz force to the Euler equations to account for magneto-hydrodynamics. Magnetic fields perpendicular to the flow are expected not to have an impact on the instabilities, while those parallel to the flow should dampen them \parencite{trussoni_kelvinhelmholtz_2008}.
 
 The scale of the simulations could also be an interesting parameter to modify. At larger scales and higher resolutions, it should be possible to observe further developments within the instabilities, although higher order solutions might be needed. At smaller scales, it should be possible to observe multiple perturbations developing at the same time, as is often the case in real-world phenomena. 
 
@@ -301,8 +304,8 @@ The scale of the simulations could also be an interesting parameter to modify. A
 This report produced a basic working model for numerical simulations of a few instabilities, and showed its results for both Rayleigh-Taylor and Kelvin-Helmholtz instabilities. While Richtmyer-Meshkov instabilities did not develop as expected, this seems to be linked to initial conditions more than the model itself. The resolution of the simulations seem to have a large impact on the results, lower resolutions having a tendency to diffuse interfaces which should remain sharp. The model could also easily be developed further by adding effects such as magnetic fields, which are important in many real-world instances of these instabilities.\\
 \linebreak
 
-\textit{The code, a LATex version of this report and all the plots produced during the simulations can be found \hyperlink{https://github.com/AlbanSMA/CompAstro_Project3}{here}.}
+\textit{The code, a LATex version of this report and all the plots produced during the simulations can be found \hyperref{https://github.com/AlbanSMA/CompAstro_Project3}{}{}{here}.}
 
-\pagebreak
+
 \printbibliography
 \end{document}

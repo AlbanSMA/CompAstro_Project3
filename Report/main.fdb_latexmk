@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1780446572.88182 "main.bcf" "main.bbl" "main" 1780447575.68161 0
-  "main.bcf" 1780447575 135902 8150f2b2629e7a04c135aff307260636 "pdflatex"
+["biber main"] 1780449331.85696 "main.bcf" "main.bbl" "main" 1780450160.66172 0
+  "main.bcf" 1780450160 136142 f730dad73620c0788387f38f343cca30 "pdflatex"
   "ref.bib" 1780437154 3434 79adc8a24bbac873048f2f9b086c0d2d ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1780447570.70032 "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" "main.pdf" "main" 1780447575.68425 0
+["pdflatex"] 1780450157.47425 "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" "main.pdf" "main" 1780450160.66434 0
   "C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1777374769 84158 d77284a6843bde1e4b9764f09fb2e89e ""
   "C:/Users/User/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1776771118 13349829 4a36b8ce873eea7331d01262fddc519c ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -112,7 +112,7 @@
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1761901070 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/User/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
-  "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" 1780447547 26343 da3b57e1be13732fca118e9a2d35ffda ""
+  "c:/Users/User/Documents/Documents/University/Master_SU/Year_1/IIB/CompAstro/Projects/Project3/Report/main.tex" 1780450154 26735 5f7f89c6e7379d74d470600fb729d80a ""
   "images/KHI/step0.pdf" 1780395368 14954 ba805135b1baf8ca7b5713a4014ce8cd ""
   "images/KHI/step10400.pdf" 1780406073 265580 ab3fad3e40374263e013ae8671954eaa ""
   "images/KHI/step3200.pdf" 1780399055 104750 051ad05f80981ba1e5bb092271dc5998 ""
@@ -129,13 +129,20 @@
   "images/RTI1/step22000.pdf" 1780390013 32424 62537f1feb1ba389ccff57c0490b241b ""
   "images/RTI1/step28400.pdf" 1780390309 34908 4ae55dae3a5673b91322157a57b9fc38 ""
   "images/RTI1/step4400.pdf" 1780389203 29075 21a333192dc76dc8c7130d6485918788 ""
+  "images/RTI2/step0.pdf" 1780435840 11215 77bb71c160cc2a26a42666b519b25053 ""
+  "images/RTI2/step13600.pdf" 1780440170 30569 3935765b407ee973bc7bd210348656c5 ""
+  "images/RTI2/step20000 copy.pdf" 1780442760 32441 44cb702d1c41689b38a0a9b7a6ee79b5 ""
+  "images/RTI2/step27200.pdf" 1780444949 35694 3bc27378f66995cc3e0225ace3e46973 ""
+  "images/RTI2/step31200.pdf" 1780446136 36167 3a707d58510e04d99ff213228f5de19a ""
+  "images/RTI2/step3600.pdf" 1780436980 26538 77f5f7ff813752ad48335f50787de982 ""
+  "images/RTI2/step36800.pdf" 1780448110 41311 3b982c8f49e9ef057da4ae471e437e7b ""
   "images/underresKHI.pdf" 1780358748 57981 8c06e116887234758e98c931eb31104e ""
-  "images/underresRTI.pdf" 1780390495 34809 82e39036e29a2a09817dcb3c8cf646ee ""
-  "main.aux" 1780447574 11091 803d82c851e9289dfb918cdda43add4a "pdflatex"
-  "main.bbl" 1780446580 27303 da9df85e818b72eebb933a3112c8134f "biber main"
-  "main.out" 1780447574 857 88f5bf10599a5bd1dcb45c66a890c5d3 "pdflatex"
-  "main.run.xml" 1780447575 2420 037752900427d53470ab58bfebae51be "pdflatex"
-  "main.tex" 1780447547 26343 da3b57e1be13732fca118e9a2d35ffda ""
+  "images/underresRTI.pdf" 1780391229 38658 9049fca0872578fdf7b3bccdcd5a0905 ""
+  "main.aux" 1780450160 11768 d82924fecee3545456671d8c555c9de0 "pdflatex"
+  "main.bbl" 1780449334 27303 da9df85e818b72eebb933a3112c8134f "biber main"
+  "main.out" 1780450160 857 88f5bf10599a5bd1dcb45c66a890c5d3 "pdflatex"
+  "main.run.xml" 1780450160 2420 037752900427d53470ab58bfebae51be "pdflatex"
+  "main.tex" 1780450154 26735 5f7f89c6e7379d74d470600fb729d80a ""
   (generated)
   "main.aux"
   "main.bcf"

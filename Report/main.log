@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.21)  3 JUN 2026 02:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.21)  3 JUN 2026 03:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -642,17 +642,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--51
 
 [1
 
-{C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-
-LaTeX Warning: Reference `subsec:RTIandRMI' on page 2 undefined on input line 54.
-
-
-LaTeX Warning: Reference `subsec:KHI' on page 2 undefined on input line 54.
-
-
-LaTeX Warning: Reference `subsec:RTIandRMI' on page 2 undefined on input line 54.
-
-[2] [3] [4]
+{C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4]
 Overfull \hbox (9.50577pt too wide) detected at line 215
 [][][]\OML/cmm/m/it/12 U[] \OT1/cmr/m/n/12 = [\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 ([] + []) + []] \OMS/cmsy/m/n/12 ^^A \OT1/cmr/m/n/12 ^^A\OML/cmm/m/it/12 t \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 U[]:
  []
@@ -660,164 +650,174 @@ Overfull \hbox (9.50577pt too wide) detected at line 215
 <images/RTI1/step0.pdf, id=118, 437.1924pt x 225.82094pt>
 File: images/RTI1/step0.pdf Graphic file (type pdf)
 <use images/RTI1/step0.pdf>
-Package pdftex.def Info: images/RTI1/step0.pdf  used on input line 224.
+Package pdftex.def Info: images/RTI1/step0.pdf  used on input line 226.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step2000.pdf, id=120, 437.1924pt x 225.82094pt>
 File: images/RTI1/step2000.pdf Graphic file (type pdf)
 <use images/RTI1/step2000.pdf>
-Package pdftex.def Info: images/RTI1/step2000.pdf  used on input line 225.
+Package pdftex.def Info: images/RTI1/step2000.pdf  used on input line 227.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step4400.pdf, id=122, 437.1924pt x 225.82094pt>
 File: images/RTI1/step4400.pdf Graphic file (type pdf)
 <use images/RTI1/step4400.pdf>
-Package pdftex.def Info: images/RTI1/step4400.pdf  used on input line 226.
+Package pdftex.def Info: images/RTI1/step4400.pdf  used on input line 228.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step14000.pdf, id=124, 437.1924pt x 225.82094pt>
 File: images/RTI1/step14000.pdf Graphic file (type pdf)
 <use images/RTI1/step14000.pdf>
-Package pdftex.def Info: images/RTI1/step14000.pdf  used on input line 227.
+Package pdftex.def Info: images/RTI1/step14000.pdf  used on input line 229.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step17200.pdf, id=126, 437.1924pt x 225.82094pt>
 File: images/RTI1/step17200.pdf Graphic file (type pdf)
 <use images/RTI1/step17200.pdf>
-Package pdftex.def Info: images/RTI1/step17200.pdf  used on input line 228.
+Package pdftex.def Info: images/RTI1/step17200.pdf  used on input line 230.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step22000.pdf, id=128, 437.1924pt x 225.82094pt>
 File: images/RTI1/step22000.pdf Graphic file (type pdf)
 <use images/RTI1/step22000.pdf>
-Package pdftex.def Info: images/RTI1/step22000.pdf  used on input line 229.
+Package pdftex.def Info: images/RTI1/step22000.pdf  used on input line 231.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 <images/RTI1/step28400.pdf, id=130, 437.1924pt x 225.82094pt>
 File: images/RTI1/step28400.pdf Graphic file (type pdf)
 <use images/RTI1/step28400.pdf>
-Package pdftex.def Info: images/RTI1/step28400.pdf  used on input line 230.
+Package pdftex.def Info: images/RTI1/step28400.pdf  used on input line 232.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 File: images/RTI1/step28400.pdf Graphic file (type pdf)
 <use images/RTI1/step28400.pdf>
-Package pdftex.def Info: images/RTI1/step28400.pdf  used on input line 231.
+Package pdftex.def Info: images/RTI1/step28400.pdf  used on input line 233.
 (pdftex.def)             Requested size: 214.87708pt x 22.88766pt.
 [5 <./images/RTI1/step0.pdf> <./images/RTI1/step2000.pdf> <./images/RTI1/step4400.pdf> <./images/RTI1/step14000.pdf> <./images/RTI1/step17200.pdf> <./images/RTI1/step22000.pdf> <./images/RTI1/step28400.pdf>]
-<images/KHI/step0.pdf, id=347, 372.9132pt x 291.3365pt>
-File: images/KHI/step0.pdf Graphic file (type pdf)
-<use images/KHI/step0.pdf>
-Package pdftex.def Info: images/KHI/step0.pdf  used on input line 240.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-<images/KHI/step3200.pdf, id=349, 372.9132pt x 291.3365pt>
-File: images/KHI/step3200.pdf Graphic file (type pdf)
-<use images/KHI/step3200.pdf>
-Package pdftex.def Info: images/KHI/step3200.pdf  used on input line 241.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-<images/KHI/step4400.pdf, id=351, 372.9132pt x 291.3365pt>
-File: images/KHI/step4400.pdf Graphic file (type pdf)
-<use images/KHI/step4400.pdf>
-Package pdftex.def Info: images/KHI/step4400.pdf  used on input line 242.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-<images/KHI/step6000.pdf, id=353, 372.9132pt x 291.3365pt>
-File: images/KHI/step6000.pdf Graphic file (type pdf)
-<use images/KHI/step6000.pdf>
-Package pdftex.def Info: images/KHI/step6000.pdf  used on input line 243.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-<images/KHI/step8000.pdf, id=355, 372.9132pt x 291.3365pt>
-File: images/KHI/step8000.pdf Graphic file (type pdf)
-<use images/KHI/step8000.pdf>
-Package pdftex.def Info: images/KHI/step8000.pdf  used on input line 244.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-<images/KHI/step10400.pdf, id=357, 372.9132pt x 291.3365pt>
-File: images/KHI/step10400.pdf Graphic file (type pdf)
-<use images/KHI/step10400.pdf>
-Package pdftex.def Info: images/KHI/step10400.pdf  used on input line 245.
-(pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
-File: images/KHI/step0.pdf Graphic file (type pdf)
-<use images/KHI/step0.pdf>
-Package pdftex.def Info: images/KHI/step0.pdf  used on input line 246.
-(pdftex.def)             Requested size: 238.75394pt x 40.79266pt.
-<images/RM/step0.pdf, id=361, 437.1924pt x 225.82094pt>
+<images/RTI2/step0.pdf, id=347, 437.1924pt x 225.16624pt>
+File: images/RTI2/step0.pdf Graphic file (type pdf)
+<use images/RTI2/step0.pdf>
+Package pdftex.def Info: images/RTI2/step0.pdf  used on input line 242.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step3600.pdf, id=349, 437.1924pt x 225.16624pt>
+File: images/RTI2/step3600.pdf Graphic file (type pdf)
+<use images/RTI2/step3600.pdf>
+Package pdftex.def Info: images/RTI2/step3600.pdf  used on input line 243.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step13600.pdf, id=351, 437.1924pt x 225.16624pt>
+File: images/RTI2/step13600.pdf Graphic file (type pdf)
+<use images/RTI2/step13600.pdf>
+Package pdftex.def Info: images/RTI2/step13600.pdf  used on input line 244.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step20000 copy.pdf, id=353, 437.1924pt x 225.16624pt>
+File: images/RTI2/step20000 copy.pdf Graphic file (type pdf)
+<use images/RTI2/step20000 copy.pdf>
+Package pdftex.def Info: images/RTI2/step20000 copy.pdf  used on input line 245.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step27200.pdf, id=355, 437.1924pt x 225.16624pt>
+File: images/RTI2/step27200.pdf Graphic file (type pdf)
+<use images/RTI2/step27200.pdf>
+Package pdftex.def Info: images/RTI2/step27200.pdf  used on input line 246.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step31200.pdf, id=357, 437.1924pt x 225.16624pt>
+File: images/RTI2/step31200.pdf Graphic file (type pdf)
+<use images/RTI2/step31200.pdf>
+Package pdftex.def Info: images/RTI2/step31200.pdf  used on input line 247.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+<images/RTI2/step36800.pdf, id=359, 437.1924pt x 225.16624pt>
+File: images/RTI2/step36800.pdf Graphic file (type pdf)
+<use images/RTI2/step36800.pdf>
+Package pdftex.def Info: images/RTI2/step36800.pdf  used on input line 248.
+(pdftex.def)             Requested size: 214.87708pt x 92.50688pt.
+File: images/RTI2/step36800.pdf Graphic file (type pdf)
+<use images/RTI2/step36800.pdf>
+Package pdftex.def Info: images/RTI2/step36800.pdf  used on input line 249.
+(pdftex.def)             Requested size: 214.87708pt x 22.5659pt.
+<images/RM/step0.pdf, id=364, 437.1924pt x 225.82094pt>
 File: images/RM/step0.pdf Graphic file (type pdf)
 <use images/RM/step0.pdf>
-Package pdftex.def Info: images/RM/step0.pdf  used on input line 255.
+Package pdftex.def Info: images/RM/step0.pdf  used on input line 258.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
-<images/RM/step1200.pdf, id=363, 437.1924pt x 225.82094pt>
+<images/RM/step1200.pdf, id=366, 437.1924pt x 225.82094pt>
 File: images/RM/step1200.pdf Graphic file (type pdf)
 <use images/RM/step1200.pdf>
-Package pdftex.def Info: images/RM/step1200.pdf  used on input line 256.
+Package pdftex.def Info: images/RM/step1200.pdf  used on input line 259.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
-<images/RM/step13600.pdf, id=365, 437.1924pt x 225.82094pt>
+<images/RM/step13600.pdf, id=368, 437.1924pt x 225.82094pt>
 File: images/RM/step13600.pdf Graphic file (type pdf)
 <use images/RM/step13600.pdf>
-Package pdftex.def Info: images/RM/step13600.pdf  used on input line 257.
+Package pdftex.def Info: images/RM/step13600.pdf  used on input line 260.
 (pdftex.def)             Requested size: 214.87708pt x 92.84402pt.
 File: images/RM/step13600.pdf Graphic file (type pdf)
 <use images/RM/step13600.pdf>
-Package pdftex.def Info: images/RM/step13600.pdf  used on input line 258.
+Package pdftex.def Info: images/RM/step13600.pdf  used on input line 261.
 (pdftex.def)             Requested size: 214.87708pt x 22.88766pt.
+<images/KHI/step0.pdf, id=373, 372.9132pt x 291.3365pt>
 File: images/KHI/step0.pdf Graphic file (type pdf)
 <use images/KHI/step0.pdf>
-Package pdftex.def Info: images/KHI/step0.pdf  used on input line 267.
+Package pdftex.def Info: images/KHI/step0.pdf  used on input line 270.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
+<images/KHI/step3200.pdf, id=375, 372.9132pt x 291.3365pt>
 File: images/KHI/step3200.pdf Graphic file (type pdf)
 <use images/KHI/step3200.pdf>
-Package pdftex.def Info: images/KHI/step3200.pdf  used on input line 268.
+Package pdftex.def Info: images/KHI/step3200.pdf  used on input line 271.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
+<images/KHI/step4400.pdf, id=377, 372.9132pt x 291.3365pt>
 File: images/KHI/step4400.pdf Graphic file (type pdf)
 <use images/KHI/step4400.pdf>
-Package pdftex.def Info: images/KHI/step4400.pdf  used on input line 269.
+Package pdftex.def Info: images/KHI/step4400.pdf  used on input line 272.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
+<images/KHI/step6000.pdf, id=379, 372.9132pt x 291.3365pt>
 File: images/KHI/step6000.pdf Graphic file (type pdf)
 <use images/KHI/step6000.pdf>
-Package pdftex.def Info: images/KHI/step6000.pdf  used on input line 270.
+Package pdftex.def Info: images/KHI/step6000.pdf  used on input line 273.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
+<images/KHI/step8000.pdf, id=381, 372.9132pt x 291.3365pt>
 File: images/KHI/step8000.pdf Graphic file (type pdf)
 <use images/KHI/step8000.pdf>
-Package pdftex.def Info: images/KHI/step8000.pdf  used on input line 271.
+Package pdftex.def Info: images/KHI/step8000.pdf  used on input line 274.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
+<images/KHI/step10400.pdf, id=383, 372.9132pt x 291.3365pt>
 File: images/KHI/step10400.pdf Graphic file (type pdf)
 <use images/KHI/step10400.pdf>
-Package pdftex.def Info: images/KHI/step10400.pdf  used on input line 272.
+Package pdftex.def Info: images/KHI/step10400.pdf  used on input line 275.
 (pdftex.def)             Requested size: 143.25381pt x 143.80127pt.
 File: images/KHI/step0.pdf Graphic file (type pdf)
 <use images/KHI/step0.pdf>
-Package pdftex.def Info: images/KHI/step0.pdf  used on input line 273.
+Package pdftex.def Info: images/KHI/step0.pdf  used on input line 276.
 (pdftex.def)             Requested size: 238.75394pt x 40.79266pt.
- [6 <./images/KHI/step0.pdf> <./images/KHI/step3200.pdf> <./images/KHI/step4400.pdf> <./images/KHI/step6000.pdf> <./images/KHI/step8000.pdf> <./images/KHI/step10400.pdf>]
-<images/underresKHI.pdf, id=556, 372.9132pt x 291.3365pt>
+ [6 <./images/RTI2/step0.pdf> <./images/RTI2/step3600.pdf> <./images/RTI2/step13600.pdf> <./images/RTI2/step20000 copy.pdf> <./images/RTI2/step27200.pdf> <./images/RTI2/step31200.pdf> <./images/RTI2/step36800.pdf>]
+<images/underresKHI.pdf, id=593, 372.9132pt x 291.3365pt>
 File: images/underresKHI.pdf Graphic file (type pdf)
 <use images/underresKHI.pdf>
-Package pdftex.def Info: images/underresKHI.pdf  used on input line 287.
+Package pdftex.def Info: images/underresKHI.pdf  used on input line 290.
 (pdftex.def)             Requested size: 477.50787pt x 373.05614pt.
-<images/underresRTI.pdf, id=557, 437.1924pt x 225.82094pt>
+<images/underresRTI.pdf, id=594, 437.1924pt x 225.82094pt>
 File: images/underresRTI.pdf Graphic file (type pdf)
 <use images/underresRTI.pdf>
-Package pdftex.def Info: images/underresRTI.pdf  used on input line 288.
+Package pdftex.def Info: images/underresRTI.pdf  used on input line 291.
 (pdftex.def)             Requested size: 477.50787pt x 246.64645pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 301--303
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 301--303
+ [7 <./images/RM/step0.pdf> <./images/RM/step1200.pdf> <./images/RM/step13600.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
 
  []
 
-[7 <./images/RM/step0.pdf> <./images/RM/step1200.pdf> <./images/RM/step13600.pdf>] [8]
-Overfull \hbox (1.57153pt too wide) in paragraph at lines 308--308
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
+
+ []
+
+[8 <./images/KHI/step0.pdf> <./images/KHI/step3200.pdf> <./images/KHI/step4400.pdf> <./images/KHI/step6000.pdf> <./images/KHI/step8000.pdf> <./images/KHI/step10400.pdf>]
+Overfull \vbox (29.8391pt too high) has occurred while \output is active []
+
+ [9 <./images/underresKHI.pdf> <./images/underresRTI.pdf>]
+Overfull \hbox (1.57153pt too wide) in paragraph at lines 311--311
 \OT1/cmr/m/n/12 tex [[]eprint: https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2003GL018195].
  []
 
 
-Overfull \hbox (5.69933pt too wide) in paragraph at lines 308--308
+Overfull \hbox (5.69933pt too wide) in paragraph at lines 311--311
 \OT1/cmr/m/n/12 & P. Rossi (Eds.), \OT1/cmr/m/it/12 Jets From Young Stars III: Nu-mer-i-cal MHD and In-sta-bil-i-ties \OT1/cmr/m/n/12 (pp. 105{
  []
 
-[9] [10 <./images/underresKHI.pdf> <./images/underresRTI.pdf>] (main.aux)
+[10] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 88F5BF10599A5BD1DCB45C66A890C5D3;857.
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -825,20 +825,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19468 strings out of 467690
- 350178 string characters out of 5415450
- 1303008 words of memory out of 5000000
- 48304 multiletter control sequences out of 15000+600000
+ 19517 strings out of 467690
+ 351864 string characters out of 5415450
+ 1303026 words of memory out of 5000000
+ 48354 multiletter control sequences out of 15000+600000
  635818 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,21n,72p,1785b,5052s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{https://github.com/AlbanSMA/CompAstro_Project3} has been referenced but does not exist, replaced by a fixed one
-
+ 63i,21n,72p,1822b,5052s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (10 pages, 1613635 bytes).
+Output written on main.pdf (10 pages, 1838272 bytes).
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 311 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1003 PDF objects out of 1200 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 352 words of extra memory for PDF output out of 10000 (max. 10000000)
 
